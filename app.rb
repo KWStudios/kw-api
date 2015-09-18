@@ -4,7 +4,7 @@ require 'tilt/haml'
 require 'json'
 require 'digest/sha2'
 
-DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/db/development.db")
+DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/db/versions.db")
 
 class Version
   include DataMapper::Resource
