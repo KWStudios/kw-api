@@ -10,6 +10,7 @@ class Version
   include DataMapper::Resource
   property :id,           Serial
   property :name,         String, :required => true
+  property :version,      String
   property :completed_at, DateTime
 end
 DataMapper.finalize
@@ -23,7 +24,9 @@ class TravisWebhook < Sinatra::Base
     else
       payload = JSON.parse(params[:payload])
       number = payload['number']
-      version = Version.new(:name => number)
+      version = Version.first_or_create(:name => "#{repo_slug}")
+      version.version = number
+      version.completed_at = Time.now
       version.save
       puts "Received valid payload for repository #{repo_slug}"
     end
@@ -43,6 +46,15 @@ class TravisWebhook < Sinatra::Base
 
   def repo_slug
     env['HTTP_TRAVIS_REPO_SLUG']
+  end
+
+  get '/plugins/:user/:repo/versions/newest' do
+    version = Version.first_or_create(:name => "#{params[:user]}/#{params[:repo]}")
+    if version.version.nil?
+      "This api has not any data stored yet :/"
+    else
+      "http://storage.googleapis.com/play-kwstudios-org/#{params[:repo]}/travis-builds/#{version.version}"
+    end
   end
 
 
