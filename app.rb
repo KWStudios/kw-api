@@ -4,7 +4,10 @@ require 'tilt/haml'
 require 'json'
 require 'digest/sha2'
 
-DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/db/versions.db")
+dbFile = open("json/db.json")
+dbJson = dbFile.read
+db = JSON.parse(dbJson)
+DataMapper.setup(:default, ENV['DATABASE_URL'] || "mysql://#{db['username']}:#{db['password']}@#{db['hostname']}/#{db['database']}")
 
 class Version
   include DataMapper::Resource
@@ -56,7 +59,7 @@ class TravisWebhook < Sinatra::Base
       updaterFile = open("json/#{params[:repo].downcase}.json")
       updaterJson = updaterFile.read
       updater = JSON.parse(updaterJson)
-      redirect to("http://storage.googleapis.com/play-kwstudios-org/#{params[:repo]}/travis-builds/#{version.version}/#{params[:repo].downcase}-#{updater["VERSION"]}.jar")
+      redirect to("http://storage.googleapis.com/play-kwstudios-org/#{params[:repo].downcase}/travis-builds/#{version.version}/#{params[:repo].downcase}-#{updater['VERSION']}.jar")
     end
   end
 
