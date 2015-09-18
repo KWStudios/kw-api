@@ -56,7 +56,7 @@ class TravisWebhook < Sinatra::Base
       updaterFile = open("json/#{params[:repo].downcase}.json")
       updaterJson = updaterFile.read
       updater = JSON.parse(updaterJson)
-      "http://storage.googleapis.com/play-kwstudios-org/#{params[:repo]}/travis-builds/#{version.version}/#{params[:repo].downcase}-#{updater["VERSION"]}"
+      redirect to("http://storage.googleapis.com/play-kwstudios-org/#{params[:repo]}/travis-builds/#{version.version}/#{params[:repo].downcase}-#{updater["VERSION"]}.jar")
     end
   end
 
