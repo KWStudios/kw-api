@@ -53,7 +53,7 @@ class TravisWebhook < Sinatra::Base
     if version.version.nil?
       "This api has not any data stored yet :/"
     else
-      updaterFile = open("https://raw.githubusercontent.com/KWStudios/RageMode/master/updater.json")
+      updaterFile = open("json/#{params[:repo].downcase}.json")
       updaterJson = updaterFile.read
       updater = JSON.parse(updaterJson)
       "http://storage.googleapis.com/play-kwstudios-org/#{params[:repo]}/travis-builds/#{version.version}/#{params[:repo].downcase}-#{updater["VERSION"]}"
