@@ -1,5 +1,5 @@
-task default: %w[build]
+task default: %w[test]
 
-task :build do
-  ruby "app.rb"
+task :test do
+  ruby -c "app.rb"
 end
