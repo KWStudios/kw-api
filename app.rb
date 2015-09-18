@@ -31,15 +31,15 @@ class TravisWebhook < Sinatra::Base
       version.version = number
       version.completed_at = Time.now
       version.save
+      puts "Authenticated successfully!"
+      puts "Welcome, TravisCI!"
+      puts "Changing stuff on KWStudios/RageMode repo_slug"
       puts "Received valid payload for repository #{repo_slug}"
     end
   end
 
   def valid_request?
     digest = Digest::SHA2.new.update("#{repo_slug}#{settings.token}")
-    puts "Authenticated successfully!"
-    puts "Welcome, TravisCI!"
-    puts "Changing stuff on KWStudios/RageMode repo_slug"
     digest.to_s == authorization
   end
 
