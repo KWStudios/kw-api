@@ -63,29 +63,6 @@ class TravisWebhook < Sinatra::Base
     end
   end
 
-
-  get '/' do
-    @tasks = Version.all
-    haml :index
-  end
-
-  post '/' do
-    Version.create  params[:task]
-    redirect to('/')
-  end
-
-  post '/task/:id' do
-    if params[:_method] == "delete"
-      Version.get(params[:id]).destroy
-      redirect to('/')
-    else
-      version = Version.get params[:id]
-      version.completed_at = version.completed_at.nil? ? Time.now : nil
-      version.save
-      redirect to('/')
-    end
-  end
-
   get '/user/:game/:name' do
     "Hello #{params['name']}, you are in #{params['game']}!"
   end
