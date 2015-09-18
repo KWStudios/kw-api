@@ -1,5 +1,1 @@
-task default: %w[test]
-
-task :test do
-  ruby "app.rb" -c
-end
+task(:default) { require_relative 'app' }
