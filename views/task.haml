@@ -1,0 +1,13 @@
+%li.task
+  = task.name
+  = task.id
+  %form.update{:action => "/task/#{task.id}", :method => "POST"}
+    %input{:type => "hidden", :name => "_method", :value => "put"}
+      -if task.completed_at.nil?
+        %input{:type => "submit", :value => "  ", :title => "Complete Task"}
+      -else
+        %input{:type => "submit", :value => "✓", :title => "Uncomplete Task"}
+
+  %form.delete{:action => "/task/#{task.id}", :method => "POST"}
+    %input{:type => "hidden", :name => "_method", :value => "delete"}
+    %input{:type => "submit", :value => "×", :title => "Delete Task"}

@@ -1,0 +1,9 @@
+%form{:action => "/", :method => "POST"}
+  %input{:name => "task[name]", :type => "text"}
+  %input.button{:type => "submit", :value => "New Task >>"}
+
+%h2 My Tasks
+
+%ul.tasks
+  - @tasks.each do |task|
+    = haml :task, locals: { task: task }
