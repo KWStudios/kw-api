@@ -24,7 +24,7 @@ class TravisWebhook < Sinatra::Base
     else
       payload = JSON.parse(params[:payload])
       number = payload['number']
-      version = Version.first_or_create(:name => "#{repo_slug}")
+      version = Version.first_or_create(:name => "#{repo_slug.downcase}")
       version.version = number
       version.completed_at = Time.now
       version.save
@@ -49,7 +49,7 @@ class TravisWebhook < Sinatra::Base
   end
 
   get '/plugins/:user/:repo/versions/newest' do
-    version = Version.first_or_create(:name => "#{params[:user]}/#{params[:repo]}")
+    version = Version.first_or_create(:name => "#{params[:user].downcase}/#{params[:repo].downcase}")
     if version.version.nil?
       "This api has not any data stored yet :/"
     else
