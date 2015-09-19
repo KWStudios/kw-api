@@ -7,7 +7,10 @@ require 'digest/sha2'
 db_file = open('json/db.json')
 db_json = db_file.read
 db = JSON.parse(db_json)
-DataMapper.setup(:default, ENV['DATABASE_URL'] || "mysql://#{db['username']}:#{db['password']}@#{db['hostname']}/#{db['database']}")
+DataMapper.setup(:default, ENV['DATABASE_URL'] || "mysql://#{db['username']}:"\
+                                                  "#{db['password']}@"\
+                                                  "#{db['hostname']}/"\
+                                                  "#{db['database']}")
 
 # The Version representing database class
 class Version
@@ -54,14 +57,17 @@ class TravisWebhook < Sinatra::Base
   end
 
   get '/plugins/:user/:repo/versions/newest' do
-    version = Version.first_or_create(name: "#{params[:user].downcase}/#{params[:repo].downcase}")
+    version = Version.first_or_create(name: "#{params[:user].downcase}/"\
+                                            "#{params[:repo].downcase}")
     if version.version.nil?
       'This api has not any data stored yet :/'
     else
       updater_file = open("json/#{params[:repo].downcase}.json")
       updater_json = updater_file.read
       updater = JSON.parse(updater_json)
-      redirect to("http://storage.googleapis.com/play-kwstudios-org/#{params[:repo].downcase}/travis-builds/#{version.version}/#{params[:repo].downcase}-#{updater['VERSION']}.jar")
+      redirect to('http://storage.googleapis.com/play-kwstudios-org/'\
+                  "#{params[:repo].downcase}/travis-builds/#{version.version}/"\
+                  "#{params[:repo].downcase}-#{updater['VERSION']}.jar")
     end
   end
 
