@@ -54,8 +54,7 @@ class TravisWebhook < Sinatra::Base
   end
 
   get '/plugins/:user/:repo/versions/newest' do
-    version = Version.first_or_create(name: "#{params[:user].downcase}/
-    #{params[:repo].downcase}")
+    version = Version.first_or_create(name: "#{params[:user].downcase}/#{params[:repo].downcase}")
     if version.version.nil?
       'This api has not any data stored yet :/'
     else
