@@ -3,6 +3,7 @@ require 'data_mapper'
 require 'tilt/haml'
 require 'json'
 require 'digest/sha2'
+require 'open-uri'
 
 db_file = open('json/db.json')
 db_json = db_file.read
@@ -62,7 +63,8 @@ class TravisWebhook < Sinatra::Base
     if version.version.nil?
       'This api has not any data stored yet :/'
     else
-      updater_file = open("json/#{params[:repo].downcase}.json")
+      updater_file = open("https://raw.githubusercontent.com/#{params[:user].downcase}/"\
+                          "#{params[:repo].downcase}/master/updater.json")
       updater_json = updater_file.read
       updater = JSON.parse(updater_json)
       redirect to('http://storage.googleapis.com/play-kwstudios-org/'\
