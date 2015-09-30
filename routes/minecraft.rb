@@ -11,7 +11,7 @@ class KWApi < Sinatra::Base
 
   # Api for The Minecraft Server play.kwstudios.org
   get '/minecraft/server/:server/players/:player/storedata/:data' do
-    if valid_minecraft_request?
+    if valid_minecraft_request?(params[:server])
       puts "Invalid payload request for server #{params[:server]}"
     else
       data = JSON.parse(params[:data])
