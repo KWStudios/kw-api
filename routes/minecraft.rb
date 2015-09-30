@@ -3,7 +3,7 @@ class KWApi < Sinatra::Base
   set :token, ENV['SERVER_UNIQUE_KEY']
 
   get '/user/:game/:name' do
-    my_hash = { game: game, name: name }
+    my_hash = { game: params[:game], name: params[:name] }
     json = JSON.generate(my_hash)
     "Hello #{params['name']}, you are in #{params['game']}! The JSON String "\
     "looks like that: #{json}"
