@@ -2,7 +2,7 @@
 class KWApi < Sinatra::Base
   set :token, ENV['TRAVIS_USER_TOKEN']
 
-  post '/travis/webhooks/RageMode' do
+  post '/travis/webhooks/versions' do
     if !valid_request?
       puts "Invalid payload request for repository #{repo_slug}"
     else
