@@ -14,8 +14,8 @@ class KWApi < Sinatra::Base
       version.save
       puts 'Authenticated successfully!'
       puts 'Welcome, TravisCI!'
-      puts 'Changing stuff on KWStudios/RageMode repo_slug'
-      puts 'Received valid payload for repository #{repo_slug}'
+      puts "Changing stuff on #{repo_slug} repo_slug"
+      puts "Received valid payload for repository #{repo_slug}"
     end
   end
 
