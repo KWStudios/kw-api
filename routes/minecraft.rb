@@ -5,7 +5,7 @@ class KWApi < Sinatra::Base
   end
 
   # Api for The Minecraft Server play.kwstudios.org
-  post '/minecraft/server/:server/:player/storedata/:data' do
+  post '/minecraft/server/:server/players/:player/storedata/:data' do
     'Arrr, this should be the Main method code!'
   end
 end
