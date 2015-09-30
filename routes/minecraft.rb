@@ -11,7 +11,7 @@ class KWApi < Sinatra::Base
 
   # Api for The Minecraft Server play.kwstudios.org
   post '/minecraft/server/:server/players/:player/storedata/:data' do
-    if !valid_minecraft_request?(params[:server])
+    if !valid_minecraft_request?(params[:server].downcase)
       puts "Invalid payload request for server #{params[:server]}"
     else
       data = JSON.parse(params[:data])
@@ -25,7 +25,7 @@ class KWApi < Sinatra::Base
 
       players = Players.first_or_create(uuid: uuid)
       players.name = name
-      players.server = params[:server]
+      players.server = params[:server].downcase
       players.first_played = first_played
       players.last_played = last_played
       players.is_online = is_online
