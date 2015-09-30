@@ -10,19 +10,20 @@ class KWApi < Sinatra::Base
   end
 
   # Api for The Minecraft Server play.kwstudios.org
-  post '/minecraft/server/:server/players/:player/storedata/:data' do
-    if !valid_request?
+  get '/minecraft/server/:server/players/:player/storedata/:data' do
+    if valid_minecraft_request?
       puts "Invalid payload request for server #{params[:server]}"
     else
       data = JSON.parse(params[:data])
 
       name = data['name']
+      uuid = data['uuid']
       first_played = Time.at(data['first_played'] / 1000)
       last_played = Time.at(data['last_played'] / 1000)
       is_online = data['is_online']
       is_banned = data['is_banned']
 
-      players = Players.first_or_create(uuid: "#{data['uuid']}")
+      players = Players.first_or_create(uuid: uuid)
       players.name = name
       players.server = params[:server]
       players.first_played = first_played
@@ -35,15 +36,21 @@ class KWApi < Sinatra::Base
       puts 'Welcome, KWStudios!'
       puts "Changing stuff on #{params[:server]} server"
       puts "Received valid payload for server #{params[:server]}"
+
+      json_hash = { name: name, uuid: uuid, first_played: first_played,
+                    last_played: last_played, is_online: is_online,
+                    is_banned: is_banned }
+      json_string = JSON.generate(json_hash)
+      json_string
     end
   end
 
-  def valid_request?(server)
+  def valid_minecraft_request?(server)
     digest = Digest::SHA2.new.update("#{server}#{settings.token}")
-    digest.to_s == authorization
+    digest.to_s == authorization_code
   end
 
-  def authorization
-    env['HTTP_AUTHORIZATION']
+  def authorization_code
+    env['HTTP_AUTHORIZATION_CODE']
   end
 end
