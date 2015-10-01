@@ -1,7 +1,7 @@
 # The main class for the Github webhook
 # (Automatic project update on push to repository)
 class KWApi < Sinatra::Base
-  set :token, ENV['GITHUB_SECRET']
+  set :github_secret_token, ENV['GITHUB_SECRET']
 
   post '/github/webhooks/kw-api/update' do
     request.body.rewind
@@ -15,7 +15,8 @@ class KWApi < Sinatra::Base
 
   def verify_signature(payload_body)
     signature = 'sha1=' + OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha1'),
-                                                  settings.token, payload_body)
+                                                  settings.github_secret_token,
+                                                  payload_body)
     return halt 500, "Signatures didn't match!" unless
     Rack::Utils.secure_compare(signature, request.env['HTTP_X_HUB_SIGNATURE'])
   end

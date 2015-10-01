@@ -1,6 +1,6 @@
 # The main class for all the Minecraft Server Api functions
 class KWApi < Sinatra::Base
-  set :token, ENV['SERVER_UNIQUE_KEY']
+  set :server_unique_token, ENV['SERVER_UNIQUE_KEY']
 
   get '/user/:game/:name' do
     my_hash = { game: params[:game], name: params[:name] }
@@ -49,9 +49,7 @@ class KWApi < Sinatra::Base
   end
 
   def valid_minecraft_request?(server)
-    digest = Digest::SHA2.new.update("#{server}#{settings.token}")
-    puts "Server: #{server}"
-    puts "Token: #{settings.token}"
+    digest = Digest::SHA2.new.update("#{server}#{settings.server_unique_token}")
     digest.to_s == authorization_code
   end
 
