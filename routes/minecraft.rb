@@ -9,10 +9,11 @@ class KWApi < Sinatra::Base
     "looks like that: #{json}"
   end
 
-  # Api for The Minecraft Server play.kwstudios.org
+  # Storedata function for players on a specific server
   post '/minecraft/server/:server/players/:player/storedata' do
     if !valid_minecraft_request?(params[:server].downcase)
       puts "Invalid payload request for server #{params[:server]}"
+      status 401
     else
       data = JSON.parse(params[:data])
 
@@ -47,13 +48,29 @@ class KWApi < Sinatra::Base
 
   def valid_minecraft_request?(server)
     digest = Digest::SHA2.new.update("#{server}#{settings.token}")
-    puts "#{digest}"
-    puts '=='
-    puts "#{authorization_code}"
     digest.to_s == authorization_code
   end
 
   def authorization_code
     env['HTTP_AUTHORIZATION_CODE']
+  end
+
+  # The get method for players (Simple minecraft server api)
+  get '/minecraft/server/:server/players/:player' do
+    players = Players.first(name: params['player'])
+    name = players.name
+    uuid = players.uuid
+    first_played = players.first_played
+    last_played = players.last_played
+    is_online = players.is_online
+    is_banned = players.is_banned
+
+    json_hash = { name: name, uuid: uuid, first_played: first_played,
+                  last_played: last_played, is_online: is_online,
+                  is_banned: is_banned }
+    json_string = JSON.generate(json_hash)
+
+    content_type 'application/json'
+    json_string
   end
 end
