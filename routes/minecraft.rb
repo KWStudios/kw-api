@@ -47,6 +47,9 @@ class KWApi < Sinatra::Base
 
   def valid_minecraft_request?(server)
     digest = Digest::SHA2.new.update("#{server}#{settings.token}")
+    puts "#{digest}"
+    puts '=='
+    puts "#{authorization_code}"
     digest.to_s == authorization_code
   end
 
