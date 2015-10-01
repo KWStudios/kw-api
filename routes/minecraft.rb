@@ -42,6 +42,8 @@ class KWApi < Sinatra::Base
                     last_played: last_played, is_online: is_online,
                     is_banned: is_banned }
       json_string = JSON.generate(json_hash)
+
+      content_type 'application/json'
       json_string
     end
   end
