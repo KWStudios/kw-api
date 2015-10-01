@@ -7,7 +7,6 @@ class KWApi < Sinatra::Base
     request.body.rewind
     payload_body = request.body.read
     verify_signature(payload_body)
-    push = JSON.parse(params[:payload])
     puts "I got some JSON: #{push.inspect}"
     `git pull`
     `bundle install`
