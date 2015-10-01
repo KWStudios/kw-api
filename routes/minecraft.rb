@@ -10,7 +10,7 @@ class KWApi < Sinatra::Base
   end
 
   # Api for The Minecraft Server play.kwstudios.org
-  post '/minecraft/server/:server/players/:player/storedata/:data' do
+  post '/minecraft/server/:server/players/:player/storedata' do
     if !valid_minecraft_request?(params[:server].downcase)
       puts "Invalid payload request for server #{params[:server]}"
     else
