@@ -58,7 +58,7 @@ class KWApi < Sinatra::Base
   end
 
   # The get method for players (Simple minecraft server api)
-  get '/minecraft/server/:server/players/:player' do
+  get '/minecraft/server/:server/players/:player/?' do
     players = Players.first(name: params['player'])
 
     if !players.nil?
