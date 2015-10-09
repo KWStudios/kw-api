@@ -2,7 +2,7 @@
 class KWApi < Sinatra::Base
   set :server_unique_token, ENV['SERVER_UNIQUE_KEY']
 
-  get '/user/:game/:name' do
+  get '/user/:game/:name/?' do
     my_hash = { game: params[:game], name: params[:name] }
     json = JSON.generate(my_hash)
     "Hello #{params['name']}, you are in #{params['game']}! The JSON String "\
@@ -10,7 +10,7 @@ class KWApi < Sinatra::Base
   end
 
   # Storedata function for players on a specific server
-  post '/minecraft/server/:server/players/:player/storedata' do
+  post '/minecraft/server/:server/players/:player/storedata/?' do
     if !valid_minecraft_request?(params[:server].downcase)
       puts "Invalid payload request for server #{params[:server]}"
       status 401

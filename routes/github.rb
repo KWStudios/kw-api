@@ -3,7 +3,7 @@
 class KWApi < Sinatra::Base
   set :github_secret_token, ENV['GITHUB_SECRET']
 
-  post '/github/webhooks/kw-api/update' do
+  post '/github/webhooks/kw-api/update/?' do
     request.body.rewind
     payload_body = request.body.read
     verify_signature(payload_body)

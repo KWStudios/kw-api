@@ -2,7 +2,7 @@
 class KWApi < Sinatra::Base
   set :token, ENV['TRAVIS_USER_TOKEN']
 
-  post '/travis/webhooks/versions' do
+  post '/travis/webhooks/versions/?' do
     if !valid_request?
       puts "Invalid payload request for repository #{repo_slug}"
     else
@@ -32,7 +32,7 @@ class KWApi < Sinatra::Base
     env['HTTP_TRAVIS_REPO_SLUG']
   end
 
-  get '/plugins/:user/:repo/versions/newest' do
+  get '/plugins/:user/:repo/versions/newest/?' do
     version = Version.first_or_create(name: "#{params[:user].downcase}/"\
                                             "#{params[:repo].downcase}")
     if version.version.nil?
