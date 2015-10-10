@@ -69,7 +69,8 @@ class KWApi < Sinatra::Base
       is_online = players.is_online
       is_banned = players.is_banned
     else
-      status 204
+      # status 204
+      halt 404
     end
     json_hash = { name: name, uuid: uuid, first_played: first_played,
                   last_played: last_played, is_online: is_online,
