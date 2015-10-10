@@ -2,3 +2,4 @@
 require_relative 'travis'
 require_relative 'minecraft'
 require_relative 'github'
+require_relative 'errors'
