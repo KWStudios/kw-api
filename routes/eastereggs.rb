@@ -4,9 +4,9 @@ class KWApi < Sinatra::Base
   get '/eastereggs/barney' do
     stream do |out|
       out << "It's gonna be legen -\n"
-      sleep 0.5
+      sleep 2
       out << " (wait for it) \n"
-      sleep 1
+      sleep 5
       out << "- dary!\n"
     end
   end
