@@ -22,16 +22,18 @@ class KWApi < Sinatra::Base
         content_type 'application/json'
         login_json_string
       else
-        login_json_hash = { message: 'The given password is not correct for this account.', status: 1 }
+        login_json_hash = { message: 'Unauthorized', status: 401 }
         login_json_string = JSON.generate(login_json_hash)
 
+        status 401
         content_type 'application/json'
         login_json_string
       end
     else
-      login_json_hash = { message: 'You have not registered this account yet.', status: 2}
+      login_json_hash = { message: 'Unauthorized', status: 401 }
       login_json_string = JSON.generate(login_json_hash)
 
+      status 401
       content_type 'application/json'
       login_json_string
     end
@@ -48,6 +50,11 @@ class KWApi < Sinatra::Base
 
     else
       register_json_hash = { message: 'Not Extended', status: 510}
+      register_json_string = JSON.generate(register_json_hash)
+
+      status 510
+      content_type 'application/json'
+      register_json_string
     end
   end
 end
