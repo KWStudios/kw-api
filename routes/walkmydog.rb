@@ -2,7 +2,7 @@
 class KWApi < Sinatra::Base
 
   # The post method to check a users password
-  post '/walkmydog/users/checklogin/?' do
+  post '/walkmydog/users/login/?' do
     user = Walkmydog_users.first(name: params[:email])
 
     if !user.nil?
