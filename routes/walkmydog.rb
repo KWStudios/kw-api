@@ -1,6 +1,15 @@
 # The main class for all the WalkMyDog routes
 class KWApi < Sinatra::Base
 
+  # Test POST method
+  post '/walkmydog/test/post/?' do
+    test_json_hash = { message: "It works", error: "nil" }
+    test_json_string = JSON.generate(test_json_hash)
+
+    content_type 'application/json'
+    test_json_string
+  end
+
   # The post method to check a users password
   post '/walkmydog/users/login/?' do
     user = Walkmydog_users.first(email: params[:email])
