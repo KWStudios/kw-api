@@ -30,7 +30,7 @@ class KWApi < Sinatra::Base
 
   # Test GET
   get '/walkmydog/test/get/?' do
-    thisisnil = nil
+    thisisnil = 4
     thisisnotnil = 5
     thisisalsonotnil = 6
 
