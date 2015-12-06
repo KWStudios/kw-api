@@ -26,6 +26,20 @@ class KWApi < Sinatra::Base
     apartment_number = payload['apartment_number']
     city = payload['city']
     zip_code = payload['zip_code']
+
+    parameter_array = [firstname, lastname, email, password, cell_phone_number,
+                       street_adress, city]
+
+    if parameter_array.include?(nil)
+      status 422
+      apply_error_json_hash = {
+        message: 'The JSON payload is missing some elements which must be set',
+        error: 422 }
+      apply_error_json_string = JSON.generate(apply_error_json_hash)
+
+      content_type 'application/json'
+      apply_error_json_string
+    end
   end
 
   # Test GET
