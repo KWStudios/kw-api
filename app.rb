@@ -3,6 +3,8 @@ require 'tilt/haml'
 require 'json'
 require 'digest/sha2'
 require 'open-uri'
+require 'bcrypt'
+require 'net/smtp'
 
 # The main class for the kw-api
 class KWApi < Sinatra::Base
