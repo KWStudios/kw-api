@@ -88,7 +88,7 @@ class KWApi < Sinatra::Base
           email_parsed = JSON.parse(email_json)
 
           message = <<MESSAGE_END
-          From: noreply <#{email_parsed['from']}>
+          From: developer <#{email_parsed['from']}>
           To: A Test User <#{email_parsed['to']}>
           MIME-Version: 1.0
           Content-type: text/html
