@@ -97,7 +97,7 @@ class KWApi < Sinatra::Base
           email_json = email_file.read
           email_parsed = JSON.parse(email_json)
 
-          message = <<MESSAGE_END
+          message = <<-MESSAGE_END
           From: developer <#{email_parsed['from']}>
           To: A Test User <#{email_parsed['to']}>
           MIME-Version: 1.0
@@ -129,11 +129,24 @@ class KWApi < Sinatra::Base
 
 MESSAGE_END
 
-          Net::SMTP.start(email_parsed['smtp'], email_parsed['port'],
-                          'api.kwstudios.org', email_parsed['login'],
-                          email_parsed['password'], :plain) do |smtp|
-            smtp.send_message message, email_parsed['from'], email_parsed['to']
+          sendgrid = SendGrid::Client.new do |c|
+            c.api_key = email_parsed['api']
           end
+
+          email = SendGrid::Mail.new do |m|
+            m.to      = email_parsed['to']
+            m.from    = email_parsed['from']
+            m.subject = 'API email test'
+            m.html    = message
+          end
+
+          sendgrid.send(email)
+
+          # Net::SMTP.start(email_parsed['smtp'], email_parsed['port'],
+          #                 'api.kwstudios.org', email_parsed['login'],
+          #                 email_parsed['password'], :plain) do |smtp|
+          #  smtp.send_message message, email_parsed['from'], email_parsed['to']
+          # end
 
           status 200
           apply_success_json_hash = { firstname: firstname, lastname: lastname,

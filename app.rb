@@ -5,6 +5,7 @@ require 'digest/sha2'
 require 'open-uri'
 require 'bcrypt'
 require 'net/smtp'
+require 'sendgrid-ruby'
 
 # The main class for the kw-api
 class KWApi < Sinatra::Base
