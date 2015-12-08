@@ -10,7 +10,7 @@ class Profile
   property :street_address,    Text, required: true
   property :apartment_number,  Integer, required: false
   property :city,              Text, required: true
-  property :zip_code,          Integer, required: true
+  property :zip_code,          String, required: true
   property :is_walker,         Boolean, default: false
   property :is_activated,      Boolean, default: false
   property :created_at,        DateTime, required: true
