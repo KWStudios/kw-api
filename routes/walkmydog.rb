@@ -29,24 +29,34 @@ class KWApi < Sinatra::Base
     is_walker = true
 
     walker_information = payload['walker_information']
-    position = walker_information['position']
-    experience_time = walker_information['experience_time']
-    experience_text = walker_information['experience_text']
-    type_of_pet = walker_information['type_of_pet']
-    walker_description = walker_information['walker_description']
-    availability = walker_information['availability']
-    education_level = walker_information['education_level']
-    link_to_profile = walker_information['link_to_profile']
-    days_available = walker_information['days_available']
-    transportation = walker_information['transportation']
-    share_application = walker_information['share_application']
+    if walker_information.nil?
+      status 422
+      apply_error_json_hash = {
+        message: 'The JSON payload is missing some elements which must be set',
+        error: 422 }
+      apply_error_json_string = JSON.generate(apply_error_json_hash)
+
+      content_type 'application/json'
+      apply_error_json_string
+    else
+      position = walker_information['position']
+      experience_time = walker_information['experience_time']
+      experience_text = walker_information['experience_text']
+      type_of_pet = walker_information['type_of_pet']
+      walker_description = walker_information['walker_description']
+      availability = walker_information['availability']
+      education_level = walker_information['education_level']
+      link_to_profile = walker_information['link_to_profile']
+      days_available = walker_information['days_available']
+      transportation = walker_information['transportation']
+      share_application = walker_information['share_application']
+    end
 
     parameter_array = [firstname, lastname, email, password, cell_phone_number,
                        street_address, city, zip_code, walker_information,
                        position, experience_time, experience_text, type_of_pet,
                        walker_description, availability, education_level,
-                       link_to_profile, days_available, transportation,
-                       share_application]
+                       days_available, transportation, share_application]
 
     if parameter_array.include?(nil)
       status 422
