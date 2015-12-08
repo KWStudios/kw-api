@@ -85,11 +85,11 @@ class KWApi < Sinatra::Base
           email_file = open(File.expand_path('../json/email.json',
                                              File.dirname(__FILE__)))
           email_json = email_file.read
-          email = JSON.parse(email_json)
+          email_parsed = JSON.parse(email_json)
 
           message = <<MESSAGE_END
-          From: noreply <#{email['from']}>
-          To: A Test User <#{email['to']}>
+          From: noreply <#{email_parsed['from']}>
+          To: A Test User <#{email_parsed['to']}>
           MIME-Version: 1.0
           Content-type: text/html
           Subject: API email test
@@ -119,9 +119,10 @@ class KWApi < Sinatra::Base
 
 MESSAGE_END
 
-          Net::SMTP.start(email['smtp'], email['port'], 'api.kwstudios.org',
-                          email['login'], email['password'], :plain) do |smtp|
-            smtp.send_message message, email['from'], email['to']
+          Net::SMTP.start(email_parsed['smtp'], email_parsed['port'],
+                          'api.kwstudios.org', email_parsed['login'],
+                          email_parsed['password'], :plain) do |smtp|
+            smtp.send_message message, email_parsed['from'], email_parsed['to']
           end
 
           status 200
