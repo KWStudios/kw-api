@@ -15,5 +15,8 @@ class KWApi < Sinatra::Base
 
     email = payload['email']
     password = payload['password']
+
+    profile = Profile.get(email)
+    puts "#{profile.firstname} logged in!"
   end
 end
