@@ -2,9 +2,7 @@
 class KWApi < Sinatra::Base
   # This happens if a user applies as a dogwalker
   post '/walkmydog/users/apply/?' do
-    payload = JSON.parse(params[:payload])
-
-    if payload.nil?
+    if params[:payload].nil?
       apply_error_json_hash = {
         message: 'The JSON payload is missing some elements which must be set',
         error: 422 }
@@ -13,6 +11,8 @@ class KWApi < Sinatra::Base
       halt 422, { 'Content-Type' => 'application/json' },
            apply_error_json_string
     end
+
+    payload = JSON.parse(params[:payload])
 
     firstname = payload['firstname']
     lastname = payload['lastname']

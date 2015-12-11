@@ -1,9 +1,7 @@
 # The main class for the WalkMyDog login route
 class KWApi < Sinatra::Base
   post '/walkmydog/users/login/?' do
-    payload = JSON.parse(params[:payload])
-
-    if payload.nil?
+    if params[:payload].nil?
       login_error_json_hash = {
         message: 'The JSON payload is missing some elements which must be set',
         error: 422 }
@@ -12,6 +10,8 @@ class KWApi < Sinatra::Base
       halt 422, { 'Content-Type' => 'application/json' },
            login_error_json_string
     end
+
+    payload = JSON.parse(params[:payload])
 
     email = payload['email']
     password = payload['password']
