@@ -29,14 +29,13 @@ class KWApi < Sinatra::Base
 
     walker_information = payload['walker_information']
     if walker_information.nil?
-      status 422
       apply_error_json_hash = {
         message: 'The JSON payload is missing some elements which must be set',
         error: 422 }
       apply_error_json_string = JSON.generate(apply_error_json_hash)
 
-      content_type 'application/json'
-      apply_error_json_string
+      halt 422, { 'Content-Type' => 'application/json' },
+           apply_error_json_string
     else
       position = walker_information['position']
       experience_time = walker_information['experience_time']
@@ -58,14 +57,13 @@ class KWApi < Sinatra::Base
                        days_available, transportation, share_application]
 
     if parameter_array.include?(nil)
-      status 422
       apply_error_json_hash = {
         message: 'The JSON payload is missing some elements which must be set',
         error: 422 }
       apply_error_json_string = JSON.generate(apply_error_json_hash)
 
-      content_type 'application/json'
-      apply_error_json_string
+      halt 422, { 'Content-Type' => 'application/json' },
+           apply_error_json_string
     else
       if Profile.count(email: email) == 0
         profile = Profile.new
@@ -142,22 +140,20 @@ class KWApi < Sinatra::Base
           content_type 'application/json'
           apply_success_json_string
         else
-          status 500
           apply_error_json_hash = {
             message: 'The given information could not be saved', error: 500 }
           apply_error_json_string = JSON.generate(apply_error_json_hash)
 
-          content_type 'application/json'
-          apply_error_json_string
+          halt 500, { 'Content-Type' => 'application/json' },
+               apply_error_json_string
         end
       else
-        status 409
         apply_error_json_hash = { message: 'This Email address already exists',
                                   error: 409 }
         apply_error_json_string = JSON.generate(apply_error_json_hash)
 
-        content_type 'application/json'
-        apply_error_json_string
+        halt 409, { 'Content-Type' => 'application/json' },
+             apply_error_json_string
       end
     end
   end
