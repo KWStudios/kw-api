@@ -1,4 +1,4 @@
-# The main class for all the WalkMyDog routes
+# The main class for the WalkMyDog apply route
 class KWApi < Sinatra::Base
   # This happens if a user applies as a dogwalker
   post '/walkmydog/users/apply/?' do
