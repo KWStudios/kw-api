@@ -1,7 +1,7 @@
 # The Walkmydog users representing database class
 class Profile
   include DataMapper::Resource
-  property :id,                Serial
+  # property :id,                Serial
   property :firstname,         Text, required: true
   property :lastname,          Text, required: true
   property :email,             String, required: true, length: 255, key: true
