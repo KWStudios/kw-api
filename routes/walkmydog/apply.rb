@@ -91,7 +91,7 @@ class KWApi < Sinatra::Base
         profile.save
 
         if profile.saved?
-          email_file = open(File.expand_path('../json/email.json',
+          email_file = open(File.expand_path('../../json/email.json',
                                              File.dirname(__FILE__)))
           email_json = email_file.read
           email_parsed = JSON.parse(email_json)
