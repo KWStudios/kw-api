@@ -125,7 +125,7 @@ class KWApi < Sinatra::Base
             m.to      = email_parsed['to']
             m.from    = email_parsed['from']
             m.subject = 'API email test'
-            m.html    = haml :email_apply
+            m.html    = haml :"walkmydog/email_apply"
           end
 
           sendgrid.send(email)
