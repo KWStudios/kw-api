@@ -15,6 +15,18 @@ class KWApi < Sinatra::Base
     zip_code = payload['zip_code']
     is_walker = true
 
+    position = nil
+    experience_time = nil
+    experience_text = nil
+    type_of_pet = nil
+    walker_description = nil
+    availability = nil
+    education_level = nil
+    link_to_profile = nil
+    days_available = nil
+    transportation = nil
+    share_application = nil
+
     walker_information = payload['walker_information']
     if walker_information.nil?
       status 422
