@@ -4,7 +4,7 @@ class Profile
   property :id,                Serial
   property :firstname,         Text, required: true
   property :lastname,          Text, required: true
-  property :email,             Text, required: true, key: true
+  property :email,             String, required: true, length: 255, key: true
   property :password_hash,     Text, required: true
   property :cell_phone_number, Text, required: true
   property :street_address,    Text, required: true
