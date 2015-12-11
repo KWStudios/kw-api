@@ -12,7 +12,15 @@ class KWApi < Sinatra::Base
            apply_error_json_string
     end
 
-    payload = JSON.parse(params[:payload])
+    begin
+      payload = JSON.parse(params[:payload])
+    rescue JSON::ParserError
+      login_error_json_hash = { message: 'I’m a teapot', error: 418 }
+      login_error_json_string = JSON.generate(login_error_json_hash)
+
+      halt 418, { 'Content-Type' => 'application/json' },
+           login_error_json_string
+    end
 
     firstname = payload['firstname']
     lastname = payload['lastname']
