@@ -1,18 +1,5 @@
 # The main class for all the WalkMyDog routes
 class KWApi < Sinatra::Base
-  # Test POST method
-  post '/walkmydog/test/post/?' do
-    test_json_hash = { message: 'It works', error: 'nil' }
-    test_json_string = JSON.generate(test_json_hash)
-
-    content_type 'application/json'
-    test_json_string
-  end
-
-  # The post method to check a users password
-  post '/walkmydog/users/login/?' do
-  end
-
   # This happens if a user applies as a dogwalker
   post '/walkmydog/users/apply/?' do
     payload = JSON.parse(params[:payload])
@@ -142,12 +129,6 @@ MESSAGE_END
 
           sendgrid.send(email)
 
-          # Net::SMTP.start(email_parsed['smtp'], email_parsed['port'],
-          #                 'api.kwstudios.org', email_parsed['login'],
-          #                 email_parsed['password'], :plain) do |smtp|
-          #  smtp.send_message message, email_parsed['from'], email_parsed['to']
-          # end
-
           status 200
           apply_success_json_hash = { firstname: firstname, lastname: lastname,
                                       email: email,
@@ -177,27 +158,6 @@ MESSAGE_END
         content_type 'application/json'
         apply_error_json_string
       end
-    end
-  end
-
-  # Test GET
-  get '/walkmydog/test/get/?' do
-    thisisnil = 4
-    thisisnotnil = 5
-    thisisalsonotnil = 6
-
-    if [thisisnil, thisisnotnil, thisisalsonotnil].include?(nil)
-      jsonout = { message: 'The array contains nil.' }
-      jsonstring = JSON.generate(jsonout)
-
-      content_type 'application/json'
-      jsonstring
-    else
-      jsonout = { message: 'The array does not contain nil.' }
-      jsonstring = JSON.generate(jsonout)
-
-      content_type 'application/json'
-      jsonstring
     end
   end
 end

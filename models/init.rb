@@ -11,6 +11,6 @@ DataMapper.setup(:default, ENV['DATABASE_URL'] || "mysql://#{db['username']}:"\
 
 require_relative 'version'
 # require_relative 'players'
-require_relative 'walkmydog_profile'
+require_relative 'walkmydog/init'
 
 DataMapper.finalize
