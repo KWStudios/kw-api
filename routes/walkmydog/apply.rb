@@ -84,38 +84,27 @@ class KWApi < Sinatra::Base
           email_json = email_file.read
           email_parsed = JSON.parse(email_json)
 
-          message = <<-MESSAGE_END
-          From: developer <#{email_parsed['from']}>
-          To: A Test User <#{email_parsed['to']}>
-          MIME-Version: 1.0
-          Content-type: text/html
-          Subject: API email test
-
-          This email was sent from api.kwstudios.org for the API tests
-
-          Firstname: #{firstname}
-          Lastname: #{lastname}
-          Email: #{email}
-          Cellphone number: #{cell_phone_number}
-          Street address: #{street_address}
-          Apartment number: #{apartment_number}
-          City: #{city}
-          Zip code: #{zip_code}
-
-          Position: #{position}
-          Experience time: #{experience_time}
-          Experience text: #{experience_text}
-          Type of own pets: #{type_of_pet}
-          Description: #{walker_description}
-          Availability: #{availability}
-          Education level: #{education_level}
-          Link to Profile: #{link_to_profile}
-          Days available: #{days_available}
-          Transportation: #{transportation}
-          Share application: #{share_application}
-
-MESSAGE_END
-
+          @email_items = [
+            ['Firstname', firstname],
+            ['Lastname', lastname],
+            ['Email', email],
+            ['Cellphone number', cell_phone_number],
+            ['Street address', street_address],
+            ['Apartment number', apartment_number],
+            ['City', city],
+            ['Zip code', zip_code],
+            ['Position', position],
+            ['Experience time', experience_time],
+            ['Experience text', experience_text],
+            ['Type of own pets', type_of_pet],
+            ['Description', walker_description],
+            ['Availability', availability],
+            ['Education level', education_level],
+            ['Link to Profile', link_to_profile],
+            ['Days available', days_available],
+            ['Transportation', transportation],
+            ['Share application', share_application]
+          ]
           sendgrid = SendGrid::Client.new do |c|
             c.api_key = email_parsed['api']
           end
@@ -124,7 +113,7 @@ MESSAGE_END
             m.to      = email_parsed['to']
             m.from    = email_parsed['from']
             m.subject = 'API email test'
-            m.html    = message
+            m.html    = haml :email_apply
           end
 
           sendgrid.send(email)
