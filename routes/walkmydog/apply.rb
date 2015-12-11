@@ -4,6 +4,16 @@ class KWApi < Sinatra::Base
   post '/walkmydog/users/apply/?' do
     payload = JSON.parse(params[:payload])
 
+    if payload.nil?
+      apply_error_json_hash = {
+        message: 'The JSON payload is missing some elements which must be set',
+        error: 422 }
+      apply_error_json_string = JSON.generate(apply_error_json_hash)
+
+      halt 422, { 'Content-Type' => 'application/json' },
+           apply_error_json_string
+    end
+
     firstname = payload['firstname']
     lastname = payload['lastname']
     email = payload['email']
@@ -15,18 +25,6 @@ class KWApi < Sinatra::Base
     zip_code = payload['zip_code']
     is_walker = true
 
-    position = nil
-    experience_time = nil
-    experience_text = nil
-    type_of_pet = nil
-    walker_description = nil
-    availability = nil
-    education_level = nil
-    link_to_profile = nil
-    days_available = nil
-    transportation = nil
-    share_application = nil
-
     walker_information = payload['walker_information']
     if walker_information.nil?
       apply_error_json_hash = {
@@ -36,19 +34,19 @@ class KWApi < Sinatra::Base
 
       halt 422, { 'Content-Type' => 'application/json' },
            apply_error_json_string
-    else
-      position = walker_information['position']
-      experience_time = walker_information['experience_time']
-      experience_text = walker_information['experience_text']
-      type_of_pet = walker_information['type_of_pet']
-      walker_description = walker_information['walker_description']
-      availability = walker_information['availability']
-      education_level = walker_information['education_level']
-      link_to_profile = walker_information['link_to_profile']
-      days_available = walker_information['days_available']
-      transportation = walker_information['transportation']
-      share_application = walker_information['share_application']
     end
+
+    position = walker_information['position']
+    experience_time = walker_information['experience_time']
+    experience_text = walker_information['experience_text']
+    type_of_pet = walker_information['type_of_pet']
+    walker_description = walker_information['walker_description']
+    availability = walker_information['availability']
+    education_level = walker_information['education_level']
+    link_to_profile = walker_information['link_to_profile']
+    days_available = walker_information['days_available']
+    transportation = walker_information['transportation']
+    share_application = walker_information['share_application']
 
     parameter_array = [firstname, lastname, email, password, cell_phone_number,
                        street_address, city, zip_code, walker_information,
