@@ -30,6 +30,8 @@ class KWApi < Sinatra::Base
     street_address = payload['street_address']
     apartment_number = payload['apartment_number']
     city = payload['city']
+    state = payload['state']
+    country = payload['country']
     zip_code = payload['zip_code']
     is_walker = true
 
@@ -57,10 +59,11 @@ class KWApi < Sinatra::Base
     share_application = walker_information['share_application']
 
     parameter_array = [firstname, lastname, email, password, cell_phone_number,
-                       street_address, city, zip_code, walker_information,
-                       position, experience_time, experience_text, type_of_pet,
-                       walker_description, availability, education_level,
-                       days_available, transportation, share_application]
+                       street_address, city, state, country, zip_code,
+                       walker_information, position, experience_time,
+                       experience_text, type_of_pet, walker_description,
+                       availability, education_level, days_available,
+                       transportation, share_application]
 
     if parameter_array.include?(nil)
       apply_error_json_hash = {
@@ -88,6 +91,8 @@ class KWApi < Sinatra::Base
         profile.street_address = street_address
         profile.apartment_number = apartment_number unless apartment_number.nil?
         profile.city = city
+        profile.state = state
+        profile.country = country
         profile.zip_code = zip_code
         profile.is_walker = is_walker
         profile.created_at = Time.now
@@ -108,6 +113,8 @@ class KWApi < Sinatra::Base
             ['Street address', street_address],
             ['Apartment number', apartment_number],
             ['City', city],
+            ['State', state],
+            ['Country', country],
             ['Zip code', zip_code],
             ['Position', position],
             ['Experience time', experience_time],
@@ -140,7 +147,9 @@ class KWApi < Sinatra::Base
                                       cell_phone_number: cell_phone_number,
                                       street_address: street_address,
                                       apartment_number: apartment_number,
-                                      city: city, zip_code: zip_code, pets: [] }
+                                      city: city, state: state,
+                                      country: country, zip_code: zip_code,
+                                      pets: [] }
           apply_success_json_string = JSON.generate(apply_success_json_hash)
 
           content_type 'application/json'
