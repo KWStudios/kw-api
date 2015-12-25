@@ -1,6 +1,9 @@
 # The Players representing database class
 class Players
   include DataMapper::Resource
+  def self.default_repository_name
+    :mc
+  end
   property :id,           Serial
   property :name,         String
   property :uuid,         Text, required: true
