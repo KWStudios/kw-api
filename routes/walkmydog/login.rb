@@ -3,6 +3,8 @@ class KWApi < Sinatra::Base
   post '/walkmydog/users/login/?' do
     verify_login(params[:payload])
 
+    payload = JSON.parse(params[:payload])
+
     email = payload['email']
     password = payload['password']
 
