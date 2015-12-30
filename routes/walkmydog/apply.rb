@@ -158,7 +158,7 @@ class KWApi < Sinatra::Base
             )
             request.run
 
-            response = request.response
+            response = request.response.body
             puts "The response looks like this: #{response}"
             response_json = JSON.parse(response)
 
@@ -166,6 +166,8 @@ class KWApi < Sinatra::Base
             longitude = response_json['results'][0]['geometry.location.lng']
             profile.latitude = latitude
             profile.longitude = longitude
+            profile.save
+            puts 'The profile was saved' if profile.saved?
             puts 'The Thread finished processing'
           end
 
