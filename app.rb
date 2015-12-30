@@ -7,6 +7,7 @@ require 'bcrypt'
 require 'net/smtp'
 require 'sendgrid-ruby'
 require 'data_mapper'
+require 'typhoeus'
 
 # The main class for the kw-api
 class KWApi < Sinatra::Base
