@@ -141,7 +141,7 @@ class KWApi < Sinatra::Base
 
           sendgrid.send(email)
 
-          Thread.new do
+          bg_geocoding = Process.fork do
             puts 'The Thread has started'
             address_parameter = "#{street_address}, #{city}, #{state}"
 
@@ -168,6 +168,8 @@ class KWApi < Sinatra::Base
             profile.longitude = longitude
             puts 'The Thread finished processing'
           end
+
+          Process.detach bg_geocoding
 
           status 200
           apply_success_json_hash = { firstname: firstname, lastname: lastname,
