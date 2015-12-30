@@ -153,7 +153,7 @@ class KWApi < Sinatra::Base
             request = Typhoeus::Request.new(
               'https://maps.googleapis.com/maps/api/geocode/json',
               method: :get,
-              body: 'this is a request body',
+              body: '',
               params: { address: address_parameter, key: gm_parsed['gm_key'] }
             )
             request.run
