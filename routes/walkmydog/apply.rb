@@ -142,6 +142,7 @@ class KWApi < Sinatra::Base
           sendgrid.send(email)
 
           Thread.new do
+            puts 'The Thread has started'
             address_parameter = "#{street_address}, #{city}, #{state}"
 
             gm_file = open(File.expand_path('../../json/gm.json',
@@ -158,12 +159,14 @@ class KWApi < Sinatra::Base
             request.run
 
             response = request.response
+            puts "The response looks like this: #{response}"
             response_json = JSON.parse(response)
 
             latitude = response_json['results'][0]['geometry.location.lat']
             longitude = response_json['results'][0]['geometry.location.lng']
             profile.latitude = latitude
             profile.longitude = longitude
+            puts 'The Thread finished processing'
           end
 
           status 200
