@@ -5,4 +5,6 @@ class Installation
   property :object_id,         String, required: true, length: 255, key: true
   property :email,             String, required: true, length: 255
   property :created_at,        DateTime, required: true
+
+  belongs_to :profile
 end

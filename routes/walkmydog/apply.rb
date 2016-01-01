@@ -141,37 +141,6 @@ class KWApi < Sinatra::Base
 
           sendgrid.send(email)
 
-          bg_geocoding = Process.fork do
-            puts 'The Thread has started'
-            address_parameter = "#{street_address}, #{city}, #{state}"
-
-            gm_file = open(File.expand_path('../../json/gm.json',
-                                            File.dirname(__FILE__)))
-            gm_json = gm_file.read
-            gm_parsed = JSON.parse(gm_json)
-
-            request = Typhoeus::Request.new(
-              'https://maps.googleapis.com/maps/api/geocode/json',
-              method: :get,
-              body: '',
-              params: { address: address_parameter, key: gm_parsed['gm_key'] }
-            )
-            request.run
-
-            response = request.response.body
-            puts "The response looks like this: #{response}"
-            response_json = JSON.parse(response)
-
-            lat = response_json['results'][0]['geometry']['location']['lat']
-            lng = response_json['results'][0]['geometry']['location']['lng']
-            profile.latitude = lat
-            profile.longitude = lng
-            profile.save
-            puts 'The Thread finished processing'
-          end
-
-          Process.detach bg_geocoding
-
           status 200
           apply_success_json_hash = { firstname: firstname, lastname: lastname,
                                       email: email,

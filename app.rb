@@ -7,6 +7,7 @@ require 'bcrypt'
 require 'net/smtp'
 require 'sendgrid-ruby'
 require 'data_mapper'
+require 'dm-serializer'
 require 'typhoeus'
 
 # The main class for the kw-api
