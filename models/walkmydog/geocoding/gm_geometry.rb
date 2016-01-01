@@ -1,5 +1,5 @@
 # The Google Maps Geometry representing class
-class GMGeometry
+class Gmgeometry
   include DataMapper::Resource
   property :id,                Serial
   property :email,             String, required: true, length: 255

@@ -1,5 +1,5 @@
 # The Google Maps AddressComponents representing class
-class GMAddressComponent
+class Gmaddresscomponent
   include DataMapper::Resource
   property :id,                Serial
   property :email,             String, required: true, length: 255

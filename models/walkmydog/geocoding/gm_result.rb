@@ -1,5 +1,5 @@
 # The Google Maps Results representing class
-class GMResult
+class Gmresult
   include DataMapper::Resource
   property :id,                Serial
   property :email,             String, required: true, length: 255

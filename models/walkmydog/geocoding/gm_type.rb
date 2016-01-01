@@ -1,5 +1,5 @@
 # The Google Maps Types representing class
-class GMTypes
+class Gmtype
   include DataMapper::Resource
   property :id,                Serial
   property :email,             String, required: true, length: 255
