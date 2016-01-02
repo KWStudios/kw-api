@@ -2,8 +2,6 @@
 
 # Helpers for the Geocoding request
 module GeocodingHelpers
-  set :gm_server_key, ENV['GM_SERVER_KEY']
-
   def geocode_address(profile)
     response = get_geocode_response(profile)
     save_gm_response(profile, JSON.parse(response)) if valid_json?(response)
@@ -16,7 +14,7 @@ module GeocodingHelpers
       'https://maps.googleapis.com/maps/api/geocode/json',
       method: :get,
       body: '',
-      params: { address: address, key: settings.gm_server_key }
+      params: { address: address, key: ENV['GM_SERVER_KEY'] }
     )
     request.run
 
