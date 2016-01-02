@@ -68,4 +68,11 @@ module ErrorCreators
     error_string = JSON.generate(error_hash)
     error_string
   end
+
+  def valid_json?(payload)
+    return false unless payload.is_a?(String)
+    JSON.parse(payload).all?
+  rescue JSON::ParserError
+    return false
+  end
 end

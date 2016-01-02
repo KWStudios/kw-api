@@ -1,4 +1,5 @@
 # The main class for the WalkMyDog apply route
+# rubocop:disable ClassLength
 class KWApi < Sinatra::Base
   # This happens if a user applies as a dogwalker
   post '/walkmydog/users/apply/?' do
@@ -140,6 +141,12 @@ class KWApi < Sinatra::Base
           end
 
           sendgrid.send(email)
+
+          # Start Geocoding in a background Process
+          bg_geocoding = Process.fork do
+            geocode_address(profile)
+          end
+          Process.detach bg_geocoding
 
           status 200
           apply_success_json_hash = { firstname: firstname, lastname: lastname,
