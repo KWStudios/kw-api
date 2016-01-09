@@ -43,8 +43,8 @@ class KWApi < Sinatra::Base
                           '/master/updater.json')
       updater_json = updater_file.read
       updater = JSON.parse(updater_json)
-      redirect to('http://storage.googleapis.com/play-kwstudios-org/'\
-                  "#{params[:repo].downcase}/travis-builds/#{version.version}/"\
+      redirect to("http://storage.googleapis.com/#{updater['BUCKET']}/"\
+                  "/travis/#{params[:repo].downcase}/#{version.version}/"\
                   "#{params[:repo].downcase}-#{updater['VERSION']}.jar")
     end
   end
