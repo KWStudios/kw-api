@@ -46,7 +46,7 @@ class KWApi < Sinatra::Base
       send_file open("https://storage.googleapis.com/#{updater['BUCKET']}/"\
                   "travis/#{params[:repo].downcase}/#{version.version}/"\
                   "#{params[:repo].downcase}-#{updater['VERSION']}.jar"),
-                filename: "#{updater['VERSION']}.jar}"
+                filename: "#{params[:repo].downcase}-#{updater['VERSION']}.jar"
     end
   end
 end
