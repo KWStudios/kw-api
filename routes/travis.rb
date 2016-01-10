@@ -43,9 +43,9 @@ class KWApi < Sinatra::Base
                           '/master/updater.json')
       updater_json = updater_file.read
       updater = JSON.parse(updater_json)
-      send_file "http://storage.googleapis.com/#{updater['BUCKET']}/"\
+      send_file open("https://storage.googleapis.com/#{updater['BUCKET']}/"\
                   "travis/#{params[:repo].downcase}/#{version.version}/"\
-                  "#{params[:repo].downcase}-#{updater['VERSION']}.jar"
+                  "#{params[:repo].downcase}-#{updater['VERSION']}.jar")
     end
   end
 end
