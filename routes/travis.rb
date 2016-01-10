@@ -44,7 +44,7 @@ class KWApi < Sinatra::Base
       updater_json = updater_file.read
       updater = JSON.parse(updater_json)
       redirect to("http://storage.googleapis.com/#{updater['BUCKET']}/"\
-                  "/travis/#{params[:repo].downcase}/#{version.version}/"\
+                  "travis/#{params[:repo].downcase}/#{version.version}/"\
                   "#{params[:repo].downcase}-#{updater['VERSION']}.jar")
     end
   end
