@@ -36,5 +36,3 @@ build/
 
 # database username and password file
 /json/*
-/json/db.json
-/json/email.json
