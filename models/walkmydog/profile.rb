@@ -17,6 +17,8 @@ class Profile
   property :is_activated,      Boolean, default: false
   property :created_at,        DateTime, required: true
 
+  has n, :dogprofiles
+
   has n, :installations
 
   has 1, :gmresponse

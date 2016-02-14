@@ -7,3 +7,6 @@ require_relative 'geocoding/gm_result'
 require_relative 'geocoding/gm_address_component'
 require_relative 'geocoding/gm_type'
 require_relative 'geocoding/gm_geometry'
+
+require_relative 'dog/dog_walk'
+require_relative 'dog/dog_profile'
