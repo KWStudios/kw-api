@@ -5,3 +5,6 @@ KWApi.helpers ErrorCreators
 
 require_relative 'geocoding'
 KWApi.helpers GeocodingHelpers
+
+require_relative 'dog_helpers'
+KWApi.helpers DogHelpers
