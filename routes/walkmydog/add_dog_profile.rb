@@ -1,6 +1,6 @@
 # The route for adding dog profiles
 class KWApi < Sinatra::Base
-  post '/walkmydog/users/pet/add/?' do
+  post '/walkmydog/users/pets/add/?' do
     verify_login(params[:payload])
 
     profile = Profile.get(JSON.parse(params[:payload])['email'])
