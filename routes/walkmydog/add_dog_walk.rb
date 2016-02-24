@@ -20,8 +20,8 @@ class KWApi < Sinatra::Base
          missing_elements_json if walk_parameter_array.include?(nil)
 
     dog_profile = profile.dogprofiles.get(dog_profile_id)
-    halt 422, { 'Content-Type' => 'application/json' },
-         missing_elements_json if dog_profile.nil?
+    halt 401, { 'Content-Type' => 'application/json' },
+         bad_credentials_json if dog_profile.nil?
 
     notes = walk_payload['notes']
 
