@@ -8,3 +8,6 @@ KWApi.helpers GeocodingHelpers
 
 require_relative 'dog_helpers'
 KWApi.helpers DogHelpers
+
+require_relative 'installation_helpers'
+KWApi.helpers InstallationHelpers

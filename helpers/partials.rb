@@ -69,6 +69,18 @@ module ErrorCreators
     error_string
   end
 
+  def conflict_json
+    error_hash = { message: 'Conflict', error: 409 }
+    error_string = JSON.generate(error_hash)
+    error_string
+  end
+
+  def internal_server_error_json
+    error_hash = { message: 'Internal Server Error', error: 409 }
+    error_string = JSON.generate(error_hash)
+    error_string
+  end
+
   def valid_json?(payload)
     return false unless payload.is_a?(String)
     JSON.parse(payload).all?
