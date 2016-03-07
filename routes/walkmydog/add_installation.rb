@@ -29,6 +29,9 @@ class KWApi < Sinatra::Base
     return halt 409, { 'Content-Type' => 'application/json' },
                 conflict_json unless Installation.get(gcm_token).nil?
 
+    old_installation = Installation.get(gcm_token)
+    old_installation.destroy unless old_installation.nil?
+
     installation = profile.installations.new
     installation.gcm_token = gcm_token
     installation.device_identifier = device_identifier
