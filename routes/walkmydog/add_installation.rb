@@ -10,27 +10,27 @@ class KWApi < Sinatra::Base
     check_json(gcm_information)
 
     gcm_payload = JSON.parse(gcm_information)
-    gcm_sender_id = gcm_payload['gcm_sender_id']
+    gcm_token = gcm_payload['gcm_token']
     device_identifier = gcm_payload['device_identifier']
 
-    gcm_parameter_array = [gcm_sender_id, device_identifier]
+    gcm_parameter_array = [gcm_token, device_identifier]
 
     halt 422, { 'Content-Type' => 'application/json' },
          missing_elements_json if gcm_parameter_array.include?(nil)
 
-    gcm_sender_id = gcm_sender_id.strip
+    gcm_token = gcm_token.strip
 
     return halt 418, { 'Content-Type' => 'application/json' },
-                teapot_json if gcm_sender_id.match(/\s/)
+                teapot_json if gcm_token.match(/\s/)
 
     return halt 418, { 'Content-Type' => 'application/json' },
-                teapot_json if gcm_sender_id.length >= 255
+                teapot_json if gcm_token.length >= 255
 
     return halt 409, { 'Content-Type' => 'application/json' },
-                conflict_json unless Installation.get(gcm_sender_id).nil?
+                conflict_json unless Installation.get(gcm_token).nil?
 
     installation = profile.installations.new
-    installation.gcm_sender_id = gcm_sender_id
+    installation.gcm_token = gcm_token
     installation.device_identifier = device_identifier
 
     profile.save

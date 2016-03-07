@@ -9,7 +9,7 @@ module InstallationHelpers
   end
 
   def get_installation_json_hash(installation)
-    gcm_json_hash = { gcm_sender_id: installation.gcm_sender_id,
+    gcm_json_hash = { gcm_token: installation.gcm_token,
                       device_identifier: installation.device_identifier,
                       created_at: installation.created_at,
                       updated_at: installation.updated_at }
