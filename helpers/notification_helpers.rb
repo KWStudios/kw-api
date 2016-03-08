@@ -7,7 +7,8 @@ module NotificationHelpers
     installations = get_installations_for_profile(profile)
 
     installations.each do |installation|
-      json_notification_hash = { sound: 'default', title: title, body: body }
+      json_notification_hash = { sound: 'default', title: title, body: body,
+                                 badge: '1' }
       json_body_hash = { to: installation.gcm_token,
                          notification: json_notification_hash,
                          priority: 'high' }
@@ -16,7 +17,7 @@ module NotificationHelpers
         'https://gcm-http.googleapis.com/gcm/send',
         method: :post,
         body: JSON.generate(json_body_hash),
-        headers: { 'Content-Type': 'application/json',
+        headers: { 'Content-Type' => 'application/json',
                    Authorization: "key=#{ENV['GCM_API_KEY']}" }
       )
       request.run
