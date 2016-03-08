@@ -2,7 +2,7 @@
 class Installation
   include DataMapper::Resource
   # property :id,                Serial
-  property :gcm_token,     String, required: true, length: 255, key: true
+  property :gcm_token,         String, required: true, length: 255, key: true
   property :device_identifier, String, required: true, length: 255
   property :created_at,        DateTime
   property :updated_at,        DateTime

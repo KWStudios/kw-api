@@ -11,3 +11,6 @@ KWApi.helpers DogHelpers
 
 require_relative 'installation_helpers'
 KWApi.helpers InstallationHelpers
+
+require_relative 'notification_helpers'
+KWApi.helpers NotificationHelpers
