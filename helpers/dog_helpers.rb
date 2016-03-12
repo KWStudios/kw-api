@@ -9,7 +9,8 @@ module DogHelpers
                       alarm_system_info: dog_profile.alarm_system_info,
                       pet_characteristics: dog_profile.pet_characteristics,
                       created_at: dog_profile.created_at,
-                      updated_at: dog_profile.updated_at }
+                      updated_at: dog_profile.updated_at,
+                      profile: get_profile_json_hash(dog_profile.profile) }
     dog_success_json_string = JSON.generate(dog_json_hash)
     dog_success_json_string
   end
@@ -21,7 +22,8 @@ module DogHelpers
                       alarm_system_info: dog_profile.alarm_system_info,
                       pet_characteristics: dog_profile.pet_characteristics,
                       created_at: dog_profile.created_at,
-                      updated_at: dog_profile.updated_at }
+                      updated_at: dog_profile.updated_at,
+                      profile: get_profile_json_hash(dog_profile.profile) }
     dog_json_hash
   end
 

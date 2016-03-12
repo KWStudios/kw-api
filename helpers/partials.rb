@@ -45,6 +45,25 @@ module LoginHelpers
     return halt 401, { 'Content-Type' => 'application/json' },
                 bad_credentials_json unless password_hash == password
   end
+
+  def get_profile_json_string(profile)
+    profile_json_hash = get_profile_json_hash(profile)
+    profile_json_string = JSON.generate(profile_json_hash)
+    profile_json_string
+  end
+
+  def get_profile_json_hash(profile)
+    profile_json_hash = { firstname: profile.firstname,
+                          lastname: profile.lastname,
+                          email: profile.email,
+                          cell_phone_number: profile.cell_phone_number,
+                          street_address: profile.street_address,
+                          apartment_number: profile.apartment_number,
+                          city: profile.city, state: profile.state,
+                          country: profile.country,
+                          zip_code: profile.zip_code, pets: [] }
+    profile_json_hash
+  end
 end
 
 # The JSON errors are created with these helpers
