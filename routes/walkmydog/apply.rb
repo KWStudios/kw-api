@@ -156,7 +156,7 @@ class KWApi < Sinatra::Base
                                       apartment_number: apartment_number,
                                       city: city, state: state,
                                       country: country, zip_code: zip_code,
-                                      pets: [] }
+                                      pets: [], is_walker: is_walker }
           apply_success_json_string = JSON.generate(apply_success_json_hash)
 
           content_type 'application/json'

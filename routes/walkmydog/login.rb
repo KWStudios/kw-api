@@ -13,7 +13,8 @@ class KWApi < Sinatra::Base
                                 apartment_number: profile.apartment_number,
                                 city: profile.city, state: profile.state,
                                 country: profile.country,
-                                zip_code: profile.zip_code, pets: [] }
+                                zip_code: profile.zip_code, pets: [],
+                                is_walker: profile.is_walker }
     login_success_json_string = JSON.generate(login_success_json_hash)
 
     content_type 'application/json'
