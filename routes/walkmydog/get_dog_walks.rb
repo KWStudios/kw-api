@@ -52,4 +52,28 @@ class KWApi < Sinatra::Base
     content_type 'application/json'
     dog_walks_json_string
   end
+
+  post '/walkmydog/users/jobs/?' do
+    verify_login(params[:payload])
+
+    profile = Profile.get(JSON.parse(params[:payload])['email'])
+
+    unless profile.is_walker
+      content_type 'application/json'
+      '[]'
+    end
+
+    dog_walks = get_dog_walks_for_profile(profile)
+
+    dog_walks_json_hash = []
+    dog_walks.each do |dog_walk|
+      dog_walks_json_hash << get_dog_walk_json_hash(dog_walk)
+    end
+
+    status 200
+    dog_walks_json_string = JSON.generate(dog_walks_json_hash)
+
+    content_type 'application/json'
+    dog_walks_json_string
+  end
 end

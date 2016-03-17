@@ -5,17 +5,8 @@ class KWApi < Sinatra::Base
 
     profile = Profile.get(JSON.parse(params[:payload])['email'])
     status 200
-    login_success_json_hash = { firstname: profile.firstname,
-                                lastname: profile.lastname,
-                                email: profile.email,
-                                cell_phone_number: profile.cell_phone_number,
-                                street_address: profile.street_address,
-                                apartment_number: profile.apartment_number,
-                                city: profile.city, state: profile.state,
-                                country: profile.country,
-                                zip_code: profile.zip_code, pets: [],
-                                is_walker: profile.is_walker }
-    login_success_json_string = JSON.generate(login_success_json_hash)
+
+    login_success_json_string = get_profile_json_string(profile)
 
     content_type 'application/json'
     login_success_json_string

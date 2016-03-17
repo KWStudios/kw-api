@@ -12,4 +12,5 @@ class Dogwalk
   property :updated_at,          DateTime
 
   belongs_to :dogprofile
+  belongs_to :profile, required: false
 end

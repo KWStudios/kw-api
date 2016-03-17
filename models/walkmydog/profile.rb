@@ -15,9 +15,11 @@ class Profile
   property :zip_code,          String, required: true
   property :is_walker,         Boolean, default: false
   property :is_activated,      Boolean, default: false
+  property :is_admin,          Boolean, default: false
   property :created_at,        DateTime, required: true
 
   has n, :dogprofiles
+  has n, :dogwalks
 
   has n, :installations
 

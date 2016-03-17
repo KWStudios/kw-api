@@ -52,6 +52,7 @@ module LoginHelpers
     profile_json_string
   end
 
+  # rubocop:disable MethodLength
   def get_profile_json_hash(profile)
     profile_json_hash = { firstname: profile.firstname,
                           lastname: profile.lastname,
@@ -61,7 +62,9 @@ module LoginHelpers
                           apartment_number: profile.apartment_number,
                           city: profile.city, state: profile.state,
                           country: profile.country,
-                          zip_code: profile.zip_code, pets: [] }
+                          zip_code: profile.zip_code, pets: [],
+                          is_walker: profile.is_walker,
+                          is_admin: profile.is_admin }
     profile_json_hash
   end
 end

@@ -149,15 +149,8 @@ class KWApi < Sinatra::Base
           Process.detach bg_geocoding
 
           status 200
-          apply_success_json_hash = { firstname: firstname, lastname: lastname,
-                                      email: email,
-                                      cell_phone_number: cell_phone_number,
-                                      street_address: street_address,
-                                      apartment_number: apartment_number,
-                                      city: city, state: state,
-                                      country: country, zip_code: zip_code,
-                                      pets: [], is_walker: is_walker }
-          apply_success_json_string = JSON.generate(apply_success_json_hash)
+
+          apply_success_json_string = get_profile_json_string(profile)
 
           content_type 'application/json'
           apply_success_json_string
