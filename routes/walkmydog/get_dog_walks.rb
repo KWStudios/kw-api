@@ -76,4 +76,26 @@ class KWApi < Sinatra::Base
     content_type 'application/json'
     dog_walks_json_string
   end
+
+  post '/walkmydog/users/jobs/queued/?' do
+    verify_login(params[:payload])
+
+    profile = Profile.get(JSON.parse(params[:payload])['email'])
+
+    halt 401, { 'Content-Type' => 'application/json' },
+         bad_credentials_json unless profile.is_admin
+
+    dog_walks = Dogwalk.all(was_finished: false)
+
+    dog_walks_json_hash = []
+    dog_walks.each do |dog_walk|
+      dog_walks_json_hash << get_dog_walk_json_hash(dog_walk)
+    end
+
+    status 200
+    dog_walks_json_string = JSON.generate(dog_walks_json_hash)
+
+    content_type 'application/json'
+    dog_walks_json_string
+  end
 end
