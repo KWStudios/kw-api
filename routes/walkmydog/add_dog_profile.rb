@@ -12,8 +12,9 @@ class KWApi < Sinatra::Base
     dog_payload = JSON.parse(dog_information)
     pet_species = dog_payload['pet_species']
     pet_name = dog_payload['pet_name']
+    pet_age = dog_payload['pet_age']
 
-    dog_parameter_array = [pet_species, pet_name]
+    dog_parameter_array = [pet_species, pet_name, pet_age]
 
     halt 422, { 'Content-Type' => 'application/json' },
          missing_elements_json if dog_parameter_array.include?(nil)
@@ -24,6 +25,7 @@ class KWApi < Sinatra::Base
     dog_profile = profile.dogprofiles.new
     dog_profile.pet_species = pet_species
     dog_profile.pet_name = pet_name
+    dog_profile.pet_age = pet_age
     dog_profile.alarm_system_info = alarm_system_info
     dog_profile.pet_characteristics = pet_characteristics
 

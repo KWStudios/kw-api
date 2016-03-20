@@ -12,6 +12,7 @@ module DogHelpers
     dog_json_hash = { id: dog_profile.id,
                       pet_species: dog_profile.pet_species,
                       pet_name: dog_profile.pet_name,
+                      pet_age: dog_profile.pet_age,
                       alarm_system_info: dog_profile.alarm_system_info,
                       pet_characteristics: dog_profile.pet_characteristics,
                       created_at: dog_profile.created_at,
