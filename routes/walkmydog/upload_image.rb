@@ -50,7 +50,7 @@ class KWApi < Sinatra::Base
 
     status 200
 
-    image_success_json_string = get_gcs_image_json_string(gcs_image)
+    image_success_json_string = get_gcs_image_json_string(profile.gcsimage)
 
     content_type 'application/json'
     image_success_json_string

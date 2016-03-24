@@ -81,7 +81,7 @@ module LoginHelpers
       gcs_url = 'https://storage.googleapis.com/'
       image_json_hash = { id: gcs_image.id,
                           gcs_key: gcs_image.gcs_key,
-                          url: "#{gcs_url}#{gcs_image.key}",
+                          url: "#{gcs_url}#{gcs_image.gcs_key}",
                           content_type: gcs_image.content_type,
                           type: gcs_image.type,
                           created_at: gcs_image.created_at,
