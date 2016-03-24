@@ -22,7 +22,7 @@ class KWApi < Sinatra::Base
       google_storage_secret_access_key: ENV['GCS_SECRET']
     )
 
-    directory = connection.directories.get("#{ENV['GCS_SECRET']}")
+    directory = connection.directories.get("#{ENV['GCS_BUCKET']}")
 
     file = directory.files.create(
       key: "users/images/#{random_name}.png",
