@@ -22,7 +22,8 @@ class KWApi < Sinatra::Base
       google_storage_secret_access_key: ENV['GCS_SECRET']
     )
 
-    directory = connection.directories.get("#{ENV['GCS_BUCKET']}")
+    gcs_bucket = ENV['GCS_BUCKET']
+    directory = connection.directories.get("#{gcs_bucket}")
 
     file = directory.files.create(
       key: "users/images/#{random_name}.png",
@@ -33,7 +34,9 @@ class KWApi < Sinatra::Base
     # Save database entry
     gcs_image = Gcsimage.new
     gcs_image.gcs_key = file.key
+    gcs_image.gcs_bucket = gcs_bucket
     gcs_image.content_type = file.content_type
+    puts file.content_type
     gcs_image.type = 'profile'
 
     profile.gcsimage = gcs_image
