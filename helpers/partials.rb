@@ -64,8 +64,33 @@ module LoginHelpers
                           country: profile.country,
                           zip_code: profile.zip_code, pets: [],
                           is_walker: profile.is_walker,
-                          is_admin: profile.is_admin }
+                          is_admin: profile.is_admin,
+                          profile_image:
+                            get_gcs_image_json_hash(profile.gcsimage) }
     profile_json_hash
+  end
+
+  def get_gcs_image_json_string(gcs_image)
+    image_json_hash = get_gcs_image_json_hash(gcs_image)
+    image_json_string = JSON.generate(image_json_hash)
+    image_json_string
+  end
+
+  def get_gcs_image_json_hash(gcs_image)
+    if !gcs_image.nil?
+      gcs_url = 'https://storage.googleapis.com/'
+      image_json_hash = { id: gcs_image.id,
+                          key: gcs_image.key,
+                          url: "#{gcs_url}#{gcs_image.key}",
+                          content_type: gcs_image.content_type,
+                          type: gcs_image.type,
+                          created_at: gcs_image.created_at,
+                          updated_at: gcs_image.updated_at }
+      return image_json_hash
+    else
+      image_json_hash = {}
+      return image_json_hash
+    end
   end
 end
 
@@ -99,6 +124,12 @@ module ErrorCreators
 
   def internal_server_error_json
     error_hash = { message: 'Internal Server Error', error: 409 }
+    error_string = JSON.generate(error_hash)
+    error_string
+  end
+
+  def unsupported_media_type_json
+    error_hash = { message: 'Unsupported Media Type	', error: 415 }
     error_string = JSON.generate(error_hash)
     error_string
   end

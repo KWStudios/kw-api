@@ -10,6 +10,9 @@ require 'data_mapper'
 require 'dm-serializer'
 require 'dm-types'
 require 'typhoeus'
+require 'fog'
+require 'mime-types'
+require 'uuidtools'
 
 # The main class for the kw-api
 class KWApi < Sinatra::Base

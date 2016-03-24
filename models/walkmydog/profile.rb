@@ -24,4 +24,6 @@ class Profile
   has n, :installations
 
   has 1, :gmresponse
+
+  has 1, :gcsimage
 end

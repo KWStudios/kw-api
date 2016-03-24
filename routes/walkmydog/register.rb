@@ -84,7 +84,7 @@ class KWApi < Sinatra::Base
           end
 
           email = SendGrid::Mail.new do |m|
-            m.to      = email_parsed['to']
+            m.to      = email
             m.from    = email_parsed['from']
             m.subject = 'API register test'
             m.html    = haml :"walkmydog/email_register"

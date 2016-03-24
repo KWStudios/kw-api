@@ -10,3 +10,5 @@ require_relative 'geocoding/gm_geometry'
 
 require_relative 'dog/dog_walk'
 require_relative 'dog/dog_profile'
+
+require_relative 'gcs_image'

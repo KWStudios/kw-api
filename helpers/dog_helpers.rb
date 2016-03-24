@@ -8,6 +8,7 @@ module DogHelpers
     dog_success_json_string
   end
 
+  # rubocop:disable MethodLength
   def get_dog_profile_json_hash(dog_profile)
     dog_json_hash = { id: dog_profile.id,
                       pet_species: dog_profile.pet_species,
@@ -17,7 +18,9 @@ module DogHelpers
                       pet_characteristics: dog_profile.pet_characteristics,
                       created_at: dog_profile.created_at,
                       updated_at: dog_profile.updated_at,
-                      profile: get_profile_json_hash(dog_profile.profile) }
+                      profile: get_profile_json_hash(dog_profile.profile),
+                      profile_image:
+                        get_gcs_image_json_hash(dog_profile.gcsimage) }
     dog_json_hash
   end
 

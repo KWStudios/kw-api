@@ -12,5 +12,7 @@ class Dogprofile
 
   has n, :dogwalks
 
+  has 1, :gcsimage
+
   belongs_to :profile
 end
