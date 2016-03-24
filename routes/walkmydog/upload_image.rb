@@ -32,7 +32,7 @@ class KWApi < Sinatra::Base
 
     # Save database entry
     gcs_image = Gcsimage.new
-    gcs_image.key = file.key
+    gcs_image.gcs_key = file.key
     gcs_image.content_type = file.content_type
     gcs_image.type = 'profile'
 
