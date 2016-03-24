@@ -35,8 +35,7 @@ class KWApi < Sinatra::Base
     gcs_image = Gcsimage.new
     gcs_image.gcs_key = file.key
     gcs_image.gcs_bucket = gcs_bucket
-    gcs_image.content_type = file.content_type
-    puts file.content_type
+    gcs_image.content_type = image[:type]
     gcs_image.type = 'profile'
 
     profile.gcsimage = gcs_image
