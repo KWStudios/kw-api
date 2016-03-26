@@ -4,7 +4,7 @@ class Dogprofile
   property :id,                  Serial
   property :pet_species,         String, required: true
   property :pet_name,            String, required: true
-  property :pet_age,             String, required: true
+  property :pet_age,             Integer, required: true
   property :alarm_system_info,   Text, required: false
   property :pet_characteristics, Text, required: false
   property :created_at,          DateTime
