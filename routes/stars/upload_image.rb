@@ -30,17 +30,17 @@ class KWApi < Sinatra::Base
 
     image_type = nil
     image_extension = nil
-    if original_type == 'image/png'
+    if original_type.eql? 'image/png'
       image_type = 'image/png'
       image_extension = 'png'
-    elsif original_type == 'image/jpg' || original_type == 'image/jpeg'
+    elsif original_type.eql?('image/jpg') || original_type.eql?('image/jpeg')
       image_type = 'image/jpg'
       image_extension = 'jpg'
     end
 
     halt 415, { 'Content-Type' => 'application/json' },
-         unsupported_media_type_json unless image_type.nil? ||
-                                            image_extension.nil?
+         unsupported_media_type_json if image_type.nil? ||
+                                        image_extension.nil?
 
     # Handle GCS upload
     random_name = UUIDTools::UUID.random_create.to_s
