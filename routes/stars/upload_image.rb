@@ -14,8 +14,9 @@ class KWApi < Sinatra::Base
     halt 422, { 'Content-Type' => 'application/json' },
          missing_elements_json if image.nil?
 
-    image_type = image[:type]
-    tempfile = image[:head]['Content-Type']
+    # image_type = image[:type]
+    image_type = image[:head]['Content-Type']
+    tempfile = image[:tempfile]
 
     halt 415, { 'Content-Type' => 'application/json' },
          unsupported_media_type_json if image_type.nil?
