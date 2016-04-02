@@ -17,3 +17,6 @@ KWApi.helpers NotificationHelpers
 
 require_relative 'fb_login_helpers'
 KWApi.helpers FBLoginHelpers
+
+require_relative 'stars_image_helpers'
+KWApi.helpers StarsImageHelpers

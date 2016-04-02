@@ -6,6 +6,12 @@ module FBLoginHelpers
     check_fb_auth(id, token)
   end
 
+  def check_fb_registration(id)
+    profile = Fbstarsprofile.get(id)
+    return halt 401, { 'Content-Type' => 'application/json' },
+                bad_credentials_json if profile.nil?
+  end
+
   def check_fb_auth(id, token)
     parameter_array = [id, token]
     return halt 422, { 'Content-Type' => 'application/json' },

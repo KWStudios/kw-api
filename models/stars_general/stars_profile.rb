@@ -17,4 +17,6 @@ class Fbstarsprofile
   property :email,        String, length: 255
   property :created_at,   DateTime
   property :updated_at,   DateTime
+
+  has n, :starsgcsimages
 end

@@ -7,7 +7,7 @@ class KWApi < Sinatra::Base
 
     unless Fbstarsprofile.count(id: id) == 0
       register_error_json_hash = {
-        message: 'This Email address already exists', error: 409 }
+        message: 'This account already exists', error: 409 }
       register_error_json_string = JSON.generate(register_error_json_hash)
 
       halt 409, { 'Content-Type' => 'application/json' },
