@@ -15,7 +15,7 @@ class KWApi < Sinatra::Base
          missing_elements_json if image.nil?
 
     image_type = image[:type]
-    tempfile = image[:tempfile]
+    tempfile = image.content_type
 
     halt 415, { 'Content-Type' => 'application/json' },
          unsupported_media_type_json if image_type.nil?
@@ -24,7 +24,12 @@ class KWApi < Sinatra::Base
          unsupported_media_type_json if tempfile.nil?
 
     halt 415, { 'Content-Type' => 'application/json' },
-         unsupported_media_type_json unless image_type.eql? 'image/png'
+         unsupported_media_type_json unless image_type.eql?('image/png')
+
+    if image_type.eql?('image/png')
+
+    elsif image_type.eql?('image/jpg') || image_type.eql?('image/jpeg')
+    end
 
     # Handle GCS upload
     random_name = UUIDTools::UUID.random_create.to_s
