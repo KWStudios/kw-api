@@ -28,6 +28,8 @@ class KWApi < Sinatra::Base
     halt 415, { 'Content-Type' => 'application/json' },
          unsupported_media_type_json if tempfile.nil?
 
+    puts original_type
+
     image_type = nil
     image_extension = nil
     if original_type.eql? 'image/png'
