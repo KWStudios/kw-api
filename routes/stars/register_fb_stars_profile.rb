@@ -46,6 +46,8 @@ class KWApi < Sinatra::Base
     fbuser.verified = verified
     fbuser.email = email
 
+    fbuser.save
+
     unless fbuser.saved?
       register_error_json_hash = {
         message: 'The given information could not be saved', error: 500 }
