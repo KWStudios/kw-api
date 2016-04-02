@@ -15,22 +15,32 @@ class KWApi < Sinatra::Base
          missing_elements_json if image.nil?
 
     # image_type = image[:type]
-    image_type = image[:head]['Content-Type']
+    image_head = image[:head]
     tempfile = image[:tempfile]
 
     halt 415, { 'Content-Type' => 'application/json' },
-         unsupported_media_type_json if image_type.nil?
+         unsupported_media_type_json if image_head.nil?
+
+    original_type = image_head['Content-Type']
+    halt 415, { 'Content-Type' => 'application/json' },
+         unsupported_media_type_json if original_type.nil?
 
     halt 415, { 'Content-Type' => 'application/json' },
          unsupported_media_type_json if tempfile.nil?
 
-    halt 415, { 'Content-Type' => 'application/json' },
-         unsupported_media_type_json unless image_type.eql?('image/png')
-
-    if image_type.eql?('image/png')
-
-    elsif image_type.eql?('image/jpg') || image_type.eql?('image/jpeg')
+    image_type = nil
+    image_extension = nil
+    if original_type == 'image/png'
+      image_type = 'image/png'
+      image_extension = 'png'
+    elsif original_type == 'image/jpg' || original_type == 'image/jpeg'
+      image_type = 'image/jpg'
+      image_extension = 'jpg'
     end
+
+    halt 415, { 'Content-Type' => 'application/json' },
+         unsupported_media_type_json unless image_type.nil? ||
+                                            image_extension.nil?
 
     # Handle GCS upload
     random_name = UUIDTools::UUID.random_create.to_s
@@ -47,7 +57,7 @@ class KWApi < Sinatra::Base
     mime_type = image_type
 
     file = directory.files.create(
-      key: "users/images/#{random_name}.png",
+      key: "images/#{image_extension}/#{random_name}.#{image_extension}",
       body: tempfile.read,
       content_type: mime_type,
       public: true
