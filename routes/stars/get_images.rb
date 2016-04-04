@@ -10,7 +10,7 @@ class KWApi < Sinatra::Base
 
     status 200
 
-    images_success_json_string = JSON.generate(dog_walks_json_hash)
+    images_success_json_string = JSON.generate(images_hash)
 
     content_type 'application/json'
     images_success_json_string
