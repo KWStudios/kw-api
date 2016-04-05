@@ -46,6 +46,8 @@ class KWApi < Sinatra::Base
     fbuser.verified = verified
     fbuser.email = email
 
+    fbuser.starsvote = Starsvote.new
+
     fbuser.save
 
     unless fbuser.saved?
