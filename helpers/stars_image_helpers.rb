@@ -13,7 +13,8 @@ module StarsImageHelpers
     if !stars_image.nil?
       uploader_hash = {}
       unless stars_image.fbstarsprofile.nil?
-        uploader_hash = get_fb_stars_profile_json_hash(fbstarsprofile)
+        uploader_hash = get_fb_stars_profile_json_hash(
+          stars_image.fbstarsprofile)
       end
 
       upvotes = 0
