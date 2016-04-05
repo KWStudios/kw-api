@@ -18,5 +18,9 @@ class Fbstarsprofile
   property :created_at,   DateTime
   property :updated_at,   DateTime
 
+  has n, :starsupvotes
+  has n, :starsdownvotes
+  has n, :starsgreatvotes
+
   has n, :starsgcsimages
 end

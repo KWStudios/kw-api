@@ -72,6 +72,7 @@ class KWApi < Sinatra::Base
     gcs_image.gcs_key = file.key
     gcs_image.gcs_bucket = gcs_bucket
     gcs_image.content_type = mime_type
+    gcs_image.fbstarsprofile = profile
 
     profile.save
 
