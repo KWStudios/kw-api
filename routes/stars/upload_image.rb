@@ -37,7 +37,7 @@ class KWApi < Sinatra::Base
       image_type = 'image/png'
       image_extension = 'png'
     elsif original_type.eql?('image/jpg') || original_type.eql?('image/jpeg')
-      image_type = 'image/jpg'
+      image_type = 'image/jpeg'
       image_extension = 'jpg'
     end
 
