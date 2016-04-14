@@ -42,7 +42,7 @@ class Starsupvote
   property :created_at,   DateTime
   property :updated_at,   DateTime
 
-  belongs_to :starsgcsimage
+  belongs_to :starsimagevote
   belongs_to :starsvote
 end
 
@@ -56,7 +56,7 @@ class Starsdownvote
   property :created_at,   DateTime
   property :updated_at,   DateTime
 
-  belongs_to :starsgcsimage
+  belongs_to :starsimagevote
   belongs_to :starsvote
 end
 
@@ -70,6 +70,6 @@ class Starsgreatvote
   property :created_at,   DateTime
   property :updated_at,   DateTime
 
-  belongs_to :starsgcsimage
+  belongs_to :starsimagevote
   belongs_to :starsvote
 end

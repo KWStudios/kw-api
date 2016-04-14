@@ -1,6 +1,6 @@
-# The main class for uploading images
+# The main class for voting images
 class KWApi < Sinatra::Base
-  post '/stars/v1/fb/upload/png/?' do
+  post '/stars/v1/images/:id/vote/?' do
     id = params[:id]
     token = params[:token]
 
@@ -72,8 +72,7 @@ class KWApi < Sinatra::Base
     gcs_image.gcs_key = file.key
     gcs_image.gcs_bucket = gcs_bucket
     gcs_image.content_type = mime_type
-    # gcs_image.fbstarsprofile = profile
-    gcs_image.starsimagevote = Starsimagevote.new
+    gcs_image.fbstarsprofile = profile
 
     profile.save
 
