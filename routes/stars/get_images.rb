@@ -25,7 +25,7 @@ class KWApi < Sinatra::Base
 
     profile = Fbstarsprofile.get(id)
 
-    images = Starsgcsimage.all(limit: 10) -
+    images = Starsgcsimage.all(limit: 10, order: [:created_at.desc]) -
              Starsgcsimage.all(Starsgcsimage.starsimagevote.starsupvotes
                                .starsvote.fbstarsprofile.id => id)
 
