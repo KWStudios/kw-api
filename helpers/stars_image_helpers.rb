@@ -25,7 +25,7 @@ module StarsImageHelpers
       unless votes.nil?
         upvotes = votes.starsupvotes.all.count
         downvotes = votes.starsdownvotes.all.count
-        greatvotes = votes.greatvotes.all.count
+        greatvotes = votes.starsgreatvotes.all.count
       end
 
       gcs_url = 'https://storage.googleapis.com/'
