@@ -27,7 +27,7 @@ class KWApi < Sinatra::Base
 
     images = Starsgcsimage.all(limit: 10) -
              Starsgcsimage.all(Starsgcsimage.starsimagevote.starsupvotes
-                               .starsvote.fbstarsprofile.id.not => id)
+                               .starsvote.fbstarsprofile.id => id)
 
     images_hash = []
     images.each do |image|
