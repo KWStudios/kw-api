@@ -1,6 +1,7 @@
 # The main class for voting images
 class KWApi < Sinatra::Base
-  post %r{\A\/stars\/v1\/images\/:imageid\/vote\/(up|down|great)\/?\z} do
+  post %r{\A\/stars\/v1\/images\/([0-9][0-9]*)\/vote\/(up|down|great)\/?\z} do
+    puts 'Route is running'
     id = params[:id]
     token = params[:token]
 
@@ -9,19 +10,19 @@ class KWApi < Sinatra::Base
 
     profile = Fbstarsprofile.get(id)
 
-    image = Starsgcsimages.get(params[:imageid])
+    image = Starsgcsimage.get(params['captures'].first)
 
     halt 404 if image.nil?
 
     puts 'The following should be up down or great'
-    puts params['captures'].first
-    if params['captures'].first == 'up'
+    puts params['captures'].second
+    if params['captures'].second == 'up'
       vote = profile.starsvote.starsupvotes.new
       vote.starsimagevote = image
-    elsif params['captures'].first == 'down'
+    elsif params['captures'].second == 'down'
       vote = profile.starsvote.starsdownvotes.new
       vote.starsimagevote = image
-    elsif params['captures'].first == 'great'
+    elsif params['captures'].second == 'great'
       vote = profile.starsvote.starsgreatvotes.new
       vote.starsimagevote = image
     else
