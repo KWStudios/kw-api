@@ -13,6 +13,9 @@ class KWApi < Sinatra::Base
 
     halt 404 if image.nil?
 
+    halt 409, { 'Content-Type' => 'application/json' },
+         already_voted_json if voted_for_image?(image, profile)
+
     if params['captures'][1] == 'up'
       vote = profile.starsvote.starsupvotes.new
       vote.starsimagevote = image

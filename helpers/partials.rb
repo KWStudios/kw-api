@@ -124,8 +124,14 @@ module ErrorCreators
     error_string
   end
 
+  def already_voted_json
+    error_hash = { message: 'Already Voted', error: 409 }
+    error_string = JSON.generate(error_hash)
+    error_string
+  end
+
   def internal_server_error_json
-    error_hash = { message: 'Internal Server Error', error: 409 }
+    error_hash = { message: 'Internal Server Error', error: 500 }
     error_string = JSON.generate(error_hash)
     error_string
   end
