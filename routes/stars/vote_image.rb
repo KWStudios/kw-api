@@ -1,7 +1,6 @@
 # The main class for voting images
 class KWApi < Sinatra::Base
   post %r{\A\/stars\/v1\/images\/([0-9][0-9]*)\/vote\/(up|down|great)\/?\z} do
-    puts 'Route is running'
     id = params[:id]
     token = params[:token]
 
@@ -14,8 +13,6 @@ class KWApi < Sinatra::Base
 
     halt 404 if image.nil?
 
-    puts 'The following should be up down or great'
-    puts params['captures'][1]
     if params['captures'][1] == 'up'
       vote = profile.starsvote.starsupvotes.new
       vote.starsimagevote = image

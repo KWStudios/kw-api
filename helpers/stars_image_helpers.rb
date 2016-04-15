@@ -48,4 +48,23 @@ module StarsImageHelpers
       return image_json_hash
     end
   end
+
+  # rubocop:disable CyclomaticComplexity
+  def voted_for_image?(image, profile)
+    return false if image.nil? || profile.nil?
+    image_vote = image.starsimagevote
+    profile_vote = profile.starsvote
+    return false if image_vote.nil? || profile_vote.nil?
+    upvotes = profile_vote.starsupvotes
+    downvotes = profile_vote.starsdownvotes
+    greatvotes = profile_vote.starsgreatvotes
+    votes = [upvotes, downvotes, greatvotes]
+    return false if votes.include?(nil)
+
+    votes.each do |vote|
+      return true unless vote.get(image_vote.id).nil?
+    end
+
+    false
+  end
 end
