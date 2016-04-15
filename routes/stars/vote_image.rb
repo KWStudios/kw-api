@@ -15,14 +15,14 @@ class KWApi < Sinatra::Base
     halt 404 if image.nil?
 
     puts 'The following should be up down or great'
-    puts params['captures'].second
-    if params['captures'].second == 'up'
+    puts params['captures'][1]
+    if params['captures'][1] == 'up'
       vote = profile.starsvote.starsupvotes.new
       vote.starsimagevote = image
-    elsif params['captures'].second == 'down'
+    elsif params['captures'][1] == 'down'
       vote = profile.starsvote.starsdownvotes.new
       vote.starsimagevote = image
-    elsif params['captures'].second == 'great'
+    elsif params['captures'][1] == 'great'
       vote = profile.starsvote.starsgreatvotes.new
       vote.starsimagevote = image
     else
