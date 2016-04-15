@@ -4,8 +4,8 @@ class KWApi < Sinatra::Base
     id = params[:id]
     token = params[:token]
 
-    verify_fb_login(id, token)
     check_fb_registration(id)
+    verify_fb_login(id, token)
 
     profile = Fbstarsprofile.get(id)
 
