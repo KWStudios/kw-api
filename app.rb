@@ -1,4 +1,4 @@
-require 'sinatra'
+require 'sinatra/base'
 require 'tilt/haml'
 require 'json'
 require 'digest/sha2'
