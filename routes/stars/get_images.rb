@@ -27,6 +27,10 @@ class KWApi < Sinatra::Base
 
     images = Starsgcsimage.all(limit: 10, order: [:created_at.desc]) -
              Starsgcsimage.all(Starsgcsimage.starsimagevote.starsupvotes
+                               .starsvote.fbstarsprofile.id => id) -
+             Starsgcsimage.all(Starsgcsimage.starsimagevote.starsdownvotes
+                               .starsvote.fbstarsprofile.id => id) -
+             Starsgcsimage.all(Starsgcsimage.starsimagevote.starsgreatvotes
                                .starsvote.fbstarsprofile.id => id)
 
     images_hash = []
