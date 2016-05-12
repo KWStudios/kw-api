@@ -35,6 +35,13 @@ class KWApi < Sinatra::Base
     dog_walk.type_of_job = type_of_job
     dog_walk.notes = notes
 
+    is_weekly = walk_payload['is_weekly']
+    if !is_weekly.nil? && is_weekly
+      dog_walk.is_weekly = true
+    else
+      dog_walk.is_weekly = false
+    end
+
     dog_profile.save
 
     unless dog_profile.saved?

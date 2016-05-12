@@ -10,6 +10,7 @@ class Dogwalk
   property :was_acknowledged,    Boolean, default: false
   property :has_started,         Boolean, default: false
   property :was_finished,        Boolean, default: false
+  property :is_weekly,           Boolean, default: false
   property :created_at,          DateTime
   property :updated_at,          DateTime
 

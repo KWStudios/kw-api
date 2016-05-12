@@ -55,6 +55,7 @@ module DogHelpers
                        was_acknowledged: dog_walk.was_acknowledged,
                        has_started: dog_walk.has_started,
                        was_finished: dog_walk.was_finished,
+                       is_weekly: dog_walk.is_weekly,
                        created_at: dog_walk.created_at,
                        updated_at: dog_walk.updated_at,
                        dog_profile: dog_json_hash,
