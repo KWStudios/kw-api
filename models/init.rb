@@ -17,17 +17,7 @@ DataMapper.setup(:mc, ENV['DATABASE_URL'] || "mysql://#{db['username']}:"\
                                                   "#{db['hostname']}/"\
                                                   "#{db['database']}")
 
-db_file = open(File.expand_path('../json/stars_general_db.json',
-                                File.dirname(__FILE__)))
-db_json = db_file.read
-db = JSON.parse(db_json)
-DataMapper.setup(:stars_general, "mysql://#{db['username']}:"\
-                                 "#{db['password']}@"\
-                                 "#{db['hostname']}/"\
-                                 "#{db['database']}")
-
 require_relative 'walkmydog/init'
 require_relative 'minecraft/init'
-require_relative 'stars_general/init'
 
 DataMapper.finalize
