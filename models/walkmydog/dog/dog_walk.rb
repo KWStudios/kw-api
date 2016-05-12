@@ -3,6 +3,8 @@ class Dogwalk
   include DataMapper::Resource
   property :id,                  Serial
   property :scheduled_time,      DateTime, required: true
+  property :timeframe_lower,     DateTime
+  property :timeframe_upper,     DateTime
   property :type_of_job,         String, length: 255, required: true
   property :notes,               Text, required: false
   property :was_acknowledged,    Boolean, default: false

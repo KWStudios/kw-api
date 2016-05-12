@@ -11,10 +11,13 @@ class KWApi < Sinatra::Base
 
     walk_payload = JSON.parse(walk_information)
     scheduled_time = walk_payload['scheduled_time']
+    timeframe_lower = walk_payload['timeframe_lower']
+    timeframe_upper = walk_payload['timeframe_upper']
     type_of_job = walk_payload['type_of_job']
     dog_profile_id = walk_payload['dog_profile']['id']
 
-    walk_parameter_array = [scheduled_time, type_of_job, dog_profile_id]
+    walk_parameter_array = [scheduled_time, type_of_job, dog_profile_id,
+                            timeframe_lower, timeframe_upper]
 
     halt 422, { 'Content-Type' => 'application/json' },
          missing_elements_json if walk_parameter_array.include?(nil)
@@ -27,6 +30,8 @@ class KWApi < Sinatra::Base
 
     dog_walk = dog_profile.dogwalks.new
     dog_walk.scheduled_time = scheduled_time
+    dog_walk.timeframe_lower = timeframe_lower
+    dog_walk.timeframe_upper = timeframe_upper
     dog_walk.type_of_job = type_of_job
     dog_walk.notes = notes
 

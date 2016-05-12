@@ -48,6 +48,8 @@ module DogHelpers
     dog_json_hash = get_dog_profile_json_hash(dog_walk.dogprofile)
     walk_json_hash = { id: dog_walk.id,
                        scheduled_time: dog_walk.scheduled_time,
+                       timeframe_lower: dog_walk.timeframe_lower,
+                       timeframe_upper: dog_walk.timeframe_upper,
                        type_of_job: dog_walk.type_of_job,
                        notes: dog_walk.notes,
                        was_acknowledged: dog_walk.was_acknowledged,
