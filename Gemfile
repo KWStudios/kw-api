@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 gem 'bcrypt'
+gem 'braintree'
 gem 'data_mapper'
 gem 'digest'
 gem 'dm-mysql-adapter'
