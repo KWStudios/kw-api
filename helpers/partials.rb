@@ -65,6 +65,7 @@ module LoginHelpers
                           zip_code: profile.zip_code, pets: [],
                           is_walker: profile.is_walker,
                           is_admin: profile.is_admin,
+                          braintree_id: profile.braintree_id,
                           profile_image:
                             get_gcs_image_json_hash(profile.gcsimage) }
     profile_json_hash
