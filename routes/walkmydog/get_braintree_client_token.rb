@@ -25,8 +25,14 @@ class KWApi < Sinatra::Base
       end
     end
 
-    Braintree::ClientToken.generate(
+    token = Braintree::ClientToken.generate(
       customer_id: profile.braintree_id
     )
+
+    token_hash = { client_token: token }
+    token_string = JSON.generate(token_hash)
+
+    content_type 'application/json'
+    token_string
   end
 end
