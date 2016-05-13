@@ -18,6 +18,8 @@ class Profile
   property :is_admin,          Boolean, default: false
   property :created_at,        DateTime, required: true
 
+  property :braintree_id,      String, required: false, length: 50
+
   has n, :dogprofiles
   has n, :dogwalks
 

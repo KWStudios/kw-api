@@ -34,11 +34,6 @@ class KWApi < Sinatra::Base
   end
 end
 
-Braintree::Configuration.environment = :sandbox
-Braintree::Configuration.merchant_id = ENV['BRAINTREE_MERCHANT']
-Braintree::Configuration.public_key = ENV['BRAINTREE_PUBLIC']
-Braintree::Configuration.private_key = ENV['BRAINTREE_PRIVATE']
-
 require_relative 'models/init'
 require_relative 'helpers/init'
 require_relative 'routes/init'
