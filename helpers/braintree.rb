@@ -21,7 +21,8 @@ module BraintreeHelpers
     type_string = nil
 
     type = result.class
-    if type.is_a? CreditCard
+    puts "Type: #{type.inspect}"
+    if type.is_a? Braintree::CreditCard
       last_4 = type.last_4
       card_type = type.card_type
       debit = type.debit
