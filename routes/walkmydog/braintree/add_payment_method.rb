@@ -38,9 +38,9 @@ class KWApi < Sinatra::Base
       payment_method_nonce: nonce
     )
 
-    puts "Result: #{result.inspect}"
+    puts "Result: #{result.payment_method.token}"
 
-    token = result.token
+    token = result.payment_method.token
 
     if !result.success? || token.nil?
       halt 500, { 'Content-Type' => 'application/json' },
