@@ -25,7 +25,7 @@ class Profile
 
   has n, :installations
 
-  has n, :paymentmethods
+  has n, :paymentMethods
 
   has 1, :gmresponse
 
