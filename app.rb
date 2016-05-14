@@ -28,6 +28,13 @@ class KWApi < Sinatra::Base
     # ...
   end
 
+  configure do
+    Braintree::Configuration.environment = :sandbox
+    Braintree::Configuration.merchant_id = ENV['BRAINTREE_MERCHANT']
+    Braintree::Configuration.public_key = ENV['BRAINTREE_PUBLIC']
+    Braintree::Configuration.private_key = ENV['BRAINTREE_PRIVATE']
+  end
+
   helpers do
     include Rack::Utils
     alias_method :h, :escape_html
