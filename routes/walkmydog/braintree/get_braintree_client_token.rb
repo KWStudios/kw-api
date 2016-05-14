@@ -22,6 +22,8 @@ class KWApi < Sinatra::Base
         profile.save
       else
         p result.errors
+        halt 500, { 'Content-Type' => 'application/json' },
+             internal_server_error_json
       end
     end
 

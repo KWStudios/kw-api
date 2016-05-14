@@ -14,3 +14,6 @@ KWApi.helpers InstallationHelpers
 
 require_relative 'notification_helpers'
 KWApi.helpers NotificationHelpers
+
+require_relative 'braintree'
+KWApi.helpers BraintreeHelpers

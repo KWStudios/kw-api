@@ -12,3 +12,5 @@ require_relative 'dog/dog_walk'
 require_relative 'dog/dog_profile'
 
 require_relative 'gcs_image'
+
+require_relative 'braintree/init'

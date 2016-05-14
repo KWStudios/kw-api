@@ -138,7 +138,13 @@ module ErrorCreators
   end
 
   def unsupported_media_type_json
-    error_hash = { message: 'Unsupported Media Type	', error: 415 }
+    error_hash = { message: 'Unsupported Media Type', error: 415 }
+    error_string = JSON.generate(error_hash)
+    error_string
+  end
+
+  def missing_parameters_json
+    error_hash = { message: 'Missing parameters', error: 422 }
     error_string = JSON.generate(error_hash)
     error_string
   end

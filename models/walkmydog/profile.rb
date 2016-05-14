@@ -25,6 +25,8 @@ class Profile
 
   has n, :installations
 
+  has n, :paymentmethods
+
   has 1, :gmresponse
 
   has 1, :gcsimage
