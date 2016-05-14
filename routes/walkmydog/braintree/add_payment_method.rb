@@ -47,7 +47,7 @@ class KWApi < Sinatra::Base
            internal_server_error_json
     end
 
-    payment_method = profile.paymentmethods.new
+    payment_method = profile.paymentMethods.new
     payment_method.token = token
 
     profile.save
