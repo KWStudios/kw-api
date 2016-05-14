@@ -2,13 +2,12 @@
 
 # Helpers for the Braintree stuff
 module BraintreeHelpers
-  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
   def get_payment_method_json_hash(payment_method)
     return {} if payment_method.nil? || !payment_method.is_a?(PaymentMethod)
 
     result = Braintree::PaymentMethod.find(payment_method.token)
-    return {} if result.nil? || !result.success?
+    return {} if result.nil?
 
     default = result.default?
 
