@@ -11,11 +11,6 @@ class KWApi < Sinatra::Base
            missing_parameters_json
     end
 
-    Braintree::Configuration.environment = :sandbox
-    Braintree::Configuration.merchant_id = ENV['BRAINTREE_MERCHANT']
-    Braintree::Configuration.public_key = ENV['BRAINTREE_PUBLIC']
-    Braintree::Configuration.private_key = ENV['BRAINTREE_PRIVATE']
-
     if profile.braintree_id.nil?
       result = Braintree::Customer.create(
         first_name: profile.firstname,
@@ -37,8 +32,6 @@ class KWApi < Sinatra::Base
       customer_id: profile.braintree_id,
       payment_method_nonce: nonce
     )
-
-    puts "Result: #{result.payment_method.token}"
 
     token = result.payment_method.token
 
