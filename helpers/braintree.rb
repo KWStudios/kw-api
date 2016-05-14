@@ -23,6 +23,7 @@ module BraintreeHelpers
     type = result.class
     puts "Type: #{type.inspect}"
     if type.is_a? Braintree::CreditCard
+      puts 'It is a credit card'
       last_4 = type.last_4
       card_type = type.card_type
       debit = type.debit
