@@ -1,4 +1,4 @@
-# The route for getting Braintree client tokens
+# The route for adding Braintree payment methods
 class KWApi < Sinatra::Base
   post '/walkmydog/braintree/payment_methods/add/?' do
     verify_login(params[:payload])
