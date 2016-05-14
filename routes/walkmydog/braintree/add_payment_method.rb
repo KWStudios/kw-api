@@ -38,6 +38,8 @@ class KWApi < Sinatra::Base
       payment_method_nonce: nonce
     )
 
+    puts "Result: #{result.inspect}"
+
     token = result.token
 
     if !result.success? || token.nil?
