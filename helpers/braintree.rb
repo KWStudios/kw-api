@@ -20,10 +20,8 @@ module BraintreeHelpers
     email = nil
     type_string = nil
 
-    type = result.class
-    puts "Type: #{type.inspect}"
-    if type.is_a? Braintree::CreditCard
-      puts 'It is a credit card'
+    type = result
+    if type.instance_of? Braintree::CreditCard
       last_4 = type.last_4
       card_type = type.card_type
       debit = type.debit
