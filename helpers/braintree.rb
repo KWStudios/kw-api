@@ -19,6 +19,7 @@ module BraintreeHelpers
     expired = nil
     email = nil
     type_string = nil
+    image_url = nil
 
     type = result
     if type.instance_of? Braintree::CreditCard
@@ -29,9 +30,11 @@ module BraintreeHelpers
       expiration_year = type.expiration_year
       expired = type.expired?
       type_string = 'creditcard'
+      image_url = type.image_url
     elsif type.instance_of? Braintree::PayPalAccount
       email = type.email
       type_string = 'paypal'
+      image_url = type.image_url
     end
 
     payment_json_hash = { id: payment_method.id,
@@ -40,7 +43,7 @@ module BraintreeHelpers
                           expiration_month: expiration_month,
                           expiration_year: expiration_year,
                           expired: expired, email: email,
-                          type: type_string }
+                          type: type_string, image_url: image_url }
     payment_json_hash
   end
 
