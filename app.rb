@@ -33,6 +33,9 @@ class KWApi < Sinatra::Base
     Braintree::Configuration.merchant_id = ENV['BRAINTREE_MERCHANT']
     Braintree::Configuration.public_key = ENV['BRAINTREE_PUBLIC']
     Braintree::Configuration.private_key = ENV['BRAINTREE_PRIVATE']
+
+    # Datamapper timezone workaround
+    ENV['TZ'] = 'utc'
   end
 
   helpers do
