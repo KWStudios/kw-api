@@ -28,9 +28,6 @@ class KWApi < Sinatra::Base
 
     notes = walk_payload['notes']
 
-    # Datamapper timezone workaround
-    ENV['TZ'] = 'utc'
-
     dog_walk = dog_profile.dogwalks.new
     dog_walk.scheduled_time = scheduled_time
     dog_walk.timeframe_lower = timeframe_lower
