@@ -28,6 +28,9 @@ class KWApi < Sinatra::Base
 
     notes = walk_payload['notes']
 
+    # Datamapper timezone workaround
+    ENV['TZ'] = 'utc'
+
     dog_walk = dog_profile.dogwalks.new
     dog_walk.scheduled_time = scheduled_time
     dog_walk.timeframe_lower = timeframe_lower
@@ -36,17 +39,14 @@ class KWApi < Sinatra::Base
     dog_walk.notes = notes
 
     is_weekly = walk_payload['is_weekly']
-    if !is_weekly.nil? && is_weekly
-      dog_walk.is_weekly = true
-    else
-      dog_walk.is_weekly = false
-    end
+    dog_walk.is_weekly = (!is_weekly.nil? && is_weekly) ? true : false
 
     dog_profile.save
 
     unless dog_profile.saved?
       walk_error_json_hash = {
-        message: 'The given information could not be saved', error: 500 }
+        message: 'The given information could not be saved', error: 500
+      }
       walk_error_json_string = JSON.generate(walk_error_json_hash)
 
       halt 500, { 'Content-Type' => 'application/json' },
