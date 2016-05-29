@@ -91,7 +91,8 @@ module DogHelpers
     return {} if location.nil?
 
     location_json_hash = { latitude: location.latitude,
-                           longitude: location.longitude }
+                           longitude: location.longitude,
+                           created_at: location.created_at }
     location_json_hash
   end
 end
