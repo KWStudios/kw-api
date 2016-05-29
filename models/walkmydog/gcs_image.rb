@@ -11,4 +11,5 @@ class Gcsimage
 
   belongs_to :profile, required: false
   belongs_to :dogprofile, required: false
+  belongs_to :dogwalk, required: false
 end

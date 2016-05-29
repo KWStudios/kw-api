@@ -11,8 +11,14 @@ class Dogwalk
   property :has_started,         Boolean, default: false
   property :was_finished,        Boolean, default: false
   property :is_weekly,           Boolean, default: false
+  property :start_date,          DateTime, required: false
+  property :end_date,            DateTime, required: false
+  property :report,              Text, required: false
   property :created_at,          DateTime
   property :updated_at,          DateTime
+
+  has n, :jobLocations
+  has n, :gcsimages
 
   belongs_to :dogprofile
   belongs_to :profile, required: false

@@ -45,6 +45,11 @@ module DogHelpers
       assigned_profile_hash = get_profile_json_hash(dog_walk.profile)
     end
 
+    job_images = []
+    dog_walk.gcsimages.each do |gcs_image|
+      job_images << get_gcs_image_json_hash(gcs_image)
+    end
+
     dog_json_hash = get_dog_profile_json_hash(dog_walk.dogprofile)
     walk_json_hash = { id: dog_walk.id,
                        scheduled_time: dog_walk.scheduled_time,
@@ -56,8 +61,12 @@ module DogHelpers
                        has_started: dog_walk.has_started,
                        was_finished: dog_walk.was_finished,
                        is_weekly: dog_walk.is_weekly,
+                       start_date: dog_walk.start_date,
+                       end_date: dog_walk.end_date,
+                       report: dog_walk.report,
                        created_at: dog_walk.created_at,
                        updated_at: dog_walk.updated_at,
+                       job_images: job_images,
                        dog_profile: dog_json_hash,
                        assigned_profile: assigned_profile_hash }
     walk_json_hash

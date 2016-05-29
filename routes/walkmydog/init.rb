@@ -12,5 +12,6 @@ require_relative 'get_installations'
 require_relative 'assign_profile_for_dog_walk'
 require_relative 'upload_image'
 require_relative 'accept_dog_walk'
+require_relative 'finish_dog_walk'
 
 require_relative 'braintree/init'
