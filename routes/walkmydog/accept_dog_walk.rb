@@ -12,7 +12,7 @@ class KWApi < Sinatra::Base
 
     dog_walk = profile.dogwalks.get(dog_walk_id)
     halt 401, { 'Content-Type' => 'application/json' },
-         bad_credentials_json if dog_walk.nil?
+         bad_credentials_json if dog_walk.nil? || dog_walk.was_finished
 
     dog_walk.was_acknowledged = true
     dog_walk.save
@@ -45,7 +45,7 @@ class KWApi < Sinatra::Base
 
     dog_walk = profile.dogwalks.get(dog_walk_id)
     halt 401, { 'Content-Type' => 'application/json' },
-         bad_credentials_json if dog_walk.nil?
+         bad_credentials_json if dog_walk.nil? || dog_walk.was_finished
 
     dog_walk.was_acknowledged = false
     dog_walk.save
