@@ -135,6 +135,7 @@ class KWApi < Sinatra::Base
     walk_payload = JSON.parse(walk_information)
     start_date = walk_payload['start_date']
     end_date = walk_payload['end_date']
+    report = walk_payload['report']
 
     job_id = params['id']
 
@@ -149,6 +150,7 @@ class KWApi < Sinatra::Base
 
     job.start_date = start_date
     job.end_date = end_date
+    job.report = report
     job.was_finished = true
 
     job.save
