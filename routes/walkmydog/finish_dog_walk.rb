@@ -91,7 +91,7 @@ class KWApi < Sinatra::Base
 
     job = profile.dogwalks.get(job_id)
     halt 401, { 'Content-Type' => 'application/json' },
-         bad_credentials_json if job.nil?
+         bad_credentials_json if job.nil? || job.was_finished
 
     locations_json_hash = []
     locations.each do |loc|
