@@ -1,6 +1,6 @@
 # The main class for uploading images
 class KWApi < Sinatra::Base
-  post %r{\A\/walkmydog\/users\/pets\/jobs\/([0-9][0-9]*)\/image\/(pee|poo|other)\/upload\/?\z} do
+  post %r{\A\/walkmydog\/users\/pets\/jobs\/([0-9][0-9]*)\/images\/(pee|poo|other)\/upload\/?\z} do
     verify_login(params[:payload])
 
     profile = Profile.get(JSON.parse(params[:payload])['email'])
@@ -63,7 +63,7 @@ class KWApi < Sinatra::Base
 
     status 200
 
-    image_success_json_string = get_gcs_image_json_string(profile.gcsimage)
+    image_success_json_string = get_gcs_image_json_string(gcs_image)
 
     content_type 'application/json'
     image_success_json_string
