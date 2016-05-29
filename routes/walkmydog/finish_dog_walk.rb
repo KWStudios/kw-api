@@ -122,4 +122,52 @@ class KWApi < Sinatra::Base
     content_type 'application/json'
     locations_json_string
   end
+
+  post '/walkmydog/users/pets/jobs/:id/finish/?' do
+    verify_login(params[:payload])
+
+    profile = Profile.get(JSON.parse(params[:payload])['email'])
+
+    walk_information = params[:information]
+    check_payload(walk_information)
+    check_json(walk_information)
+
+    walk_payload = JSON.parse(walk_information)
+    start_date = walk_payload['start_date']
+    end_date = walk_payload['end_date']
+
+    job_id = params['id']
+
+    walk_parameter_array = [start_date, end_date, job_id]
+
+    halt 422, { 'Content-Type' => 'application/json' },
+         missing_elements_json if walk_parameter_array.include?(nil)
+
+    job = profile.dogwalks.get(job_id)
+    halt 401, { 'Content-Type' => 'application/json' },
+         bad_credentials_json if job.nil? || job.was_finished
+
+    job.start_date = start_date
+    job.end_date = end_date
+    job.was_finished = true
+
+    job.save
+
+    unless job.saved?
+      walk_error_json_hash = {
+        message: 'The given information could not be saved', error: 500
+      }
+      walk_error_json_string = JSON.generate(walk_error_json_hash)
+
+      halt 500, { 'Content-Type' => 'application/json' },
+           walk_error_json_string
+    end
+
+    status 200
+
+    finish_json_string = get_dog_walk_json_string(job)
+
+    content_type 'application/json'
+    finish_json_string
+  end
 end
