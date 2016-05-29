@@ -68,4 +68,58 @@ class KWApi < Sinatra::Base
     content_type 'application/json'
     image_success_json_string
   end
+
+  post '/walkmydog/users/pets/jobs/:id/locations/upload/?' do
+    verify_login(params[:payload])
+
+    profile = Profile.get(JSON.parse(params[:payload])['email'])
+
+    walk_information = params[:information]
+    check_payload(walk_information)
+    check_json(walk_information)
+
+    walk_payload = JSON.parse(walk_information)
+    locations = walk_payload['locations']
+
+    job_id = params['id']
+
+    walk_parameter_array = [locations, job_id]
+
+    halt 422, { 'Content-Type' => 'application/json' },
+         missing_elements_json if walk_parameter_array.include?(nil) ||
+                                  !locations.respond_to?('each')
+
+    job = profile.dogwalks.get(job_id)
+    halt 401, { 'Content-Type' => 'application/json' },
+         bad_credentials_json if job.nil?
+
+    locations_json_hash = []
+    locations.each do |loc|
+      next if loc['latitude'].nil? || loc['longitude'].nil?
+      location = job.jobLocations.new
+      location.latitude = loc['latitude']
+      location.longitude = loc['longitude']
+
+      locations_json_hash << get_job_location_json_hash(location)
+    end
+
+    job.save
+
+    unless job.saved?
+      walk_error_json_hash = {
+        message: 'The given information could not be saved', error: 500
+      }
+      walk_error_json_string = JSON.generate(walk_error_json_hash)
+
+      halt 500, { 'Content-Type' => 'application/json' },
+           walk_error_json_string
+    end
+
+    status 200
+
+    locations_json_string = JSON.generate(locations: locations_json_hash)
+
+    content_type 'application/json'
+    locations_json_string
+  end
 end

@@ -31,7 +31,6 @@ module DogHelpers
 
   # Dog walk stuff
 
-  # rubocop:disable MethodLength
   def get_dog_walk_json_string(dog_walk)
     walk_json_hash = get_dog_walk_json_hash(dog_walk)
     walk_success_json_string = JSON.generate(walk_json_hash)
@@ -80,5 +79,19 @@ module DogHelpers
   def get_dog_walks_for_profile(profile)
     dog_walks = profile.dogwalks.all
     dog_walks
+  end
+
+  def get_job_location_json_string(location)
+    location_json_hash = get_job_location_json_hash(location)
+    location_json_string = JSON.generate(location_json_hash)
+    location_json_string
+  end
+
+  def get_job_location_json_hash(location)
+    return {} if location.nil?
+
+    location_json_hash = { latitude: location.latitude,
+                           longitude: location.longitude }
+    location_json_hash
   end
 end
