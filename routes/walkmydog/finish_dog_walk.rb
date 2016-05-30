@@ -151,6 +151,7 @@ class KWApi < Sinatra::Base
     job.start_date = start_date
     job.end_date = end_date
     job.report = report
+    job.has_started = true
     job.was_finished = true
 
     job.save
