@@ -78,8 +78,7 @@ class KWApi < Sinatra::Base
     check_payload(walk_information)
     check_json(walk_information)
 
-    walk_payload = JSON.parse(walk_information)
-    locations = walk_payload['locations']
+    locations = JSON.parse(walk_information)
 
     job_id = params['id']
 
