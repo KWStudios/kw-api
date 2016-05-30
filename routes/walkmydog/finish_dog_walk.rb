@@ -116,7 +116,7 @@ class KWApi < Sinatra::Base
 
     status 200
 
-    locations_json_string = JSON.generate(locations: locations_json_hash)
+    locations_json_string = JSON.generate(locations_json_hash)
 
     content_type 'application/json'
     locations_json_string
