@@ -30,13 +30,17 @@ class KWApi < Sinatra::Base
     halt 422, { 'Content-Type' => 'application/json' },
          missing_elements_json if dog_walk.nil?
 
+    halt 401, { 'Content-Type' => 'application/json' },
+         bad_credentials_json if dog_walk.was_finished
+
     assignee_profile.dogwalks << dog_walk
 
     assignee_profile.save
 
     unless assignee_profile.saved?
       walk_error_json_hash = {
-        message: 'The given information could not be saved', error: 500 }
+        message: 'The given information could not be saved', error: 500
+      }
       walk_error_json_string = JSON.generate(walk_error_json_hash)
 
       halt 500, { 'Content-Type' => 'application/json' },
