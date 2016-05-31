@@ -2,8 +2,8 @@
 class JobLocation
   include DataMapper::Resource
   property :id,                  Serial
-  property :latitude,            Float, precision: 53, scale: 43
-  property :longitude,           Float, precision: 53, scale: 43
+  property :latitude,            Float, precision: 53, scale: 30
+  property :longitude,           Float, precision: 53, scale: 30
   property :created_at,          DateTime
   property :updated_at,          DateTime
 
