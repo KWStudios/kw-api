@@ -4,6 +4,7 @@ class JobLocation
   property :id,                  Serial
   property :latitude,            Float, precision: 53, scale: 30
   property :longitude,           Float, precision: 53, scale: 30
+  property :position,            Integer
   property :created_at,          DateTime
   property :updated_at,          DateTime
 

@@ -92,12 +92,16 @@ class KWApi < Sinatra::Base
     halt 401, { 'Content-Type' => 'application/json' },
          bad_credentials_json if job.nil? || job.was_finished
 
+    position = 0
     locations_json_hash = []
     locations.each do |loc|
       next if loc['latitude'].nil? || loc['longitude'].nil?
       location = job.jobLocations.new
       location.latitude = loc['latitude']
       location.longitude = loc['longitude']
+      location.position = position
+
+      position += 1
 
       locations_json_hash << get_job_location_json_hash(location)
     end

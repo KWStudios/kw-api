@@ -92,6 +92,7 @@ module DogHelpers
 
     location_json_hash = { latitude: location.latitude,
                            longitude: location.longitude,
+                           position: location.position,
                            created_at: location.created_at }
     location_json_hash
   end
