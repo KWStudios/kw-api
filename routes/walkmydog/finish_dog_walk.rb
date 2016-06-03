@@ -170,11 +170,10 @@ class KWApi < Sinatra::Base
     end
 
     # Start messaging in a background Process
-    bg_geocoding = Process.fork do
+    Thread.new do
       send_notification_to_profile('Walk', 'Your job was finished!',
                                    job.dogprofile.profile)
     end
-    Process.detach bg_geocoding
 
     status 200
 
