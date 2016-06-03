@@ -45,7 +45,7 @@ class KWApi < Sinatra::Base
     # Start messaging in a background Process
     Thread.new do
       send_notification_to_profile('Walk',
-                                   "The notes for #{job.dogprofile.pet_name}"\
+                                   "The notes for #{job.dogprofile.pet_name} "\
                                    'changed!', job.profile)
     end
 
