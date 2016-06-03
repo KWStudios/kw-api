@@ -42,6 +42,14 @@ class KWApi < Sinatra::Base
            walk_error_json_string
     end
 
+    # Start messaging in a background Process
+    Thread.new do
+      send_notification_to_profile('Walk',
+                                   "The notes for #{job.dogprofile.pet_name}"\
+                                   'changed!',
+                                   assignee_profile)
+    end
+
     status 200
 
     dog_walk_json_string = get_dog_walk_json_string(job)
