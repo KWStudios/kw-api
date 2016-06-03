@@ -14,7 +14,7 @@ module NotificationHelpers
                          priority: 'high' }
 
       request = Typhoeus::Request.new(
-        'https://gcm-http.googleapis.com/gcm/send',
+        'https://fcm.googleapis.com/fcm/send',
         method: :post,
         body: JSON.generate(json_body_hash),
         headers: { 'Content-Type' => 'application/json',
@@ -22,7 +22,8 @@ module NotificationHelpers
       )
       request.run
 
-      # response = request.response.body
+      response = request.response.body
+      puts response
     end
   end
 end
