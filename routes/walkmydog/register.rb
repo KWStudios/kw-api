@@ -3,7 +3,9 @@
 class KWApi < Sinatra::Base
   # This happens if a user registers as a customer
   post '/walkmydog/users/register/?' do
-    if params[:payload].nil?
+    request.body.rewind
+    payload_body = request.body.read
+    if params[:payload].nil? && payload_body.nil?
       register_error_json_hash = {
         message: 'The JSON payload is missing some elements which must be set',
         error: 422 }
@@ -13,8 +15,9 @@ class KWApi < Sinatra::Base
            register_error_json_string
     end
 
+    raw_payload = [payload_body, params[:payload]].find { |i| !i.nil? }
     begin
-      payload = JSON.parse(params[:payload])
+      payload = JSON.parse(raw_payload)
     rescue JSON::ParserError
       login_error_json_hash = { message: 'I am a teapot', error: 418 }
       login_error_json_string = JSON.generate(login_error_json_hash)
