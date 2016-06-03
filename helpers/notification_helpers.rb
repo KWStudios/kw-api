@@ -4,6 +4,8 @@
 module NotificationHelpers
   # rubocop:disable MethodLength
   def send_notification_to_profile(title, body, profile)
+    return if profile.nil?
+
     installations = get_installations_for_profile(profile)
 
     installations.each do |installation|

@@ -46,8 +46,7 @@ class KWApi < Sinatra::Base
     Thread.new do
       send_notification_to_profile('Walk',
                                    "The notes for #{job.dogprofile.pet_name}"\
-                                   'changed!',
-                                   assignee_profile)
+                                   'changed!', job.profile)
     end
 
     status 200
