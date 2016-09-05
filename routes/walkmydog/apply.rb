@@ -15,7 +15,7 @@ class KWApi < Sinatra::Base
            apply_error_json_string
     end
 
-    raw_payload = [payload_body, params[:payload]].find { |i|
+    raw_payload = [params[:payload], payload_body].find { |i|
       !i.nil? && !i.strip.empty?
     }
     begin
