@@ -15,7 +15,9 @@ class KWApi < Sinatra::Base
            apply_error_json_string
     end
 
-    raw_payload = [payload_body, params[:payload]].find { |i| !i.nil? }
+    raw_payload = [payload_body, params[:payload]].find { |i|
+      !i.nil? && !i.strip.empty?
+    }
     begin
       payload = JSON.parse(raw_payload)
     rescue JSON::ParserError
