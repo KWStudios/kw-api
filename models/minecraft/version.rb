@@ -2,7 +2,7 @@
 class Version
   include DataMapper::Resource
   def self.default_repository_name
-    :mc
+    :default
   end
   property :id,           Serial
   property :name,         String, required: true
