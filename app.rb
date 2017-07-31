@@ -1,18 +1,3 @@
-require 'sinatra/base'
-require 'tilt/haml'
-require 'json'
-require 'digest/sha2'
-require 'open-uri'
-require 'bcrypt'
-require 'net/smtp'
-require 'data_mapper'
-require 'dm-serializer'
-require 'dm-types'
-require 'typhoeus'
-require 'fog'
-require 'mime-types'
-require 'uuidtools'
-
 # The main class for the kw-api
 class KWApi < Sinatra::Base
   enable :sessions

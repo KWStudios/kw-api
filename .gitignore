@@ -36,3 +36,6 @@ build/
 
 # database username and password file
 /json/*
+
+# .env specific
+.env

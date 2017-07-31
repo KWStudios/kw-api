@@ -19,6 +19,9 @@ gem 'sinatra'
 gem 'typhoeus'
 gem 'uuidtools'
 
+# Use dotenv
+gem 'dotenv'
+
 group :test do
   gem "rake"
   gem "rubocop"
