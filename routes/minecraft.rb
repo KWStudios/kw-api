@@ -6,7 +6,7 @@ class KWApi < Sinatra::Base
     my_hash = { game: params[:game], name: params[:name] }
     json = JSON.generate(my_hash)
     "Hello #{params['name']}, you are in the game #{params['game']}! "\
-    "The JSON String looks like that: #{json}"
+    "The JSON String looks like the following: #{json}"
   end
 
   # Storedata function for players on a specific server
