@@ -8,9 +8,7 @@ class KWApi < Sinatra::Base
     payload_body = request.body.read
     verify_signature(payload_body)
     puts 'I got some JSON!'
-    `git pull`
-    `bundle install`
-    `bundle exec passenger-config restart-app /var/www`
+    `./reload.sh`
   end
 
   def verify_signature(payload_body)

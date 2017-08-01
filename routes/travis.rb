@@ -21,7 +21,7 @@ class KWApi < Sinatra::Base
       msg = nil
       if verified
         # Run add version
-        number = json_payload['number']
+        number = JSON.generate(json_payload)['number']
         version = Version.first_or_create(name: "#{repo_slug.downcase}")
         version.version = number
         version.completed_at = Time.now
