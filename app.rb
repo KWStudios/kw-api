@@ -10,6 +10,7 @@ Dotenv.load
 require 'base64'
 require 'openssl'
 require 'logger'
+require 'open-uri'
 
 Bundler.require
 
